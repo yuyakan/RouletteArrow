@@ -8,9 +8,105 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showIntersitialAd: Bool = false
+    @State private var degree: Int = 0
+    @State var rand: Int = 0
+    @State var setting: Bool = false
+    @State var start: Bool = false
+    @State var separation: Bool = false
+    @State var num: Int = 4
+    @State var text: String = "Roullet arrow"
+    @State var num_cover: Int = 0
+    @State var prev_num: Int = 4
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        let bouns = UIScreen.main.bounds
+        let width = bouns.width
+        let heigth = bouns.height
+        VStack{
+            Text(" ").font(.largeTitle).opacity(0)
+            Spacer()
+            ZStack{
+                Image("\(num)")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .opacity(separation ? 0.2:0)
+                Image("arrow2")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .rotationEffect(Angle(degrees: Double(degree)))
+                    .animation(Animation.easeOut(duration: 8), value: degree)
+                Text(text).font(.title2).frame(width: width * 0.5)
+            }
+            Spacer()
+            
+            HStack{
+                Toggle(isOn: $setting) {
+                }.labelsHidden()
+                    .padding()
+                Spacer()
+                Button(action: {
+                    start.toggle()
+                    rotate()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
+                        start.toggle()
+                        showIntersitialAd.toggle()
+                    }
+                },
+                       label: {
+                    Text("Sart").font(.largeTitle)
+                })
+                    .opacity(setting ? 0:1)
+                Spacer()
+                Toggle(isOn: $setting) {
+                }.labelsHidden()
+                .padding()
+                .hidden()
+                .disabled(true)
+            }
+            .padding(.bottom)
+            .opacity(start ? 0:1)
+            
+            if setting {
+                HStack{
+                    Text("Theme").font(.title2).padding()
+                    TextField("Placeholder", text: $text)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                }
+                HStack{
+                    Text("Separation").font(.title2).padding()
+                    Spacer()
+                    Toggle(isOn: $separation) {
+                    }.labelsHidden()
+                    .padding()
+                }.padding(.bottom)
+                HStack{
+                    Text("\(num) people")
+                        .font(.title2)
+                        .padding(.bottom)
+                    Spacer()
+                    Picker("Number of people", selection: $num) {
+                        Text("2").tag(2)
+                        Text("3").tag(3)
+                        Text("4").tag(4)
+                        Text("5").tag(5)
+                        Text("6").tag(6)
+                        Text("7").tag(7)
+                        Text("8").tag(8)
+                    }.pickerStyle(WheelPickerStyle())
+                    .frame(width: width * 0.4, height: heigth * 0.1)
+                    .padding([.leading,.bottom])
+                    Spacer()
+                }.padding()
+                Spacer()
+            }
+        }.presentInterstitialAd(isPresented: $showIntersitialAd, adUnitId: "ca-app-pub-3940256099942544/4411468910")
+    }
+    func rotate() {
+        self.rand = Int.random(in: 1...num)
+        self.degree += 2160 + Int((360 / num) * rand) + Int((360 / prev_num) * num_cover)
+        self.num_cover = num - rand
+        self.prev_num = num
     }
 }
 
