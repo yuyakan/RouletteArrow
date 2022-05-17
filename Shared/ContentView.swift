@@ -10,14 +10,14 @@ import SwiftUI
 struct ContentView: View {
     @State var showIntersitialAd: Bool = false
     @State private var degree: Int = 0
-    @State var rand: Int = 0
+    @State var randomSelect: Int = 0
     @State var setting: Bool = false
     @State var start: Bool = false
     @State var separation: Bool = false
-    @State var num: Int = 4
+    @State var peoples: Int = 4
     @State var text: String = "Roullet arrow"
-    @State var num_cover: Int = 0
-    @State var prev_num: Int = 4
+    @State var fixedNumber: Int = 0
+    @State var previousPeoples: Int = 4
     var body: some View {
         let bouns = UIScreen.main.bounds
         let width = bouns.width
@@ -26,7 +26,7 @@ struct ContentView: View {
             Text(" ").font(.largeTitle).opacity(0)
             Spacer()
             ZStack{
-                Image("\(num)")
+                Image("\(peoples)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .opacity(separation ? 0.2:0)
@@ -81,11 +81,11 @@ struct ContentView: View {
                     .padding()
                 }.padding(.bottom)
                 HStack{
-                    Text("\(num) people")
+                    Text("\(peoples) people")
                         .font(.title2)
                         .padding(.bottom)
                     Spacer()
-                    Picker("Number of people", selection: $num) {
+                    Picker("Number of people", selection: $peoples) {
                         Text("2").tag(2)
                         Text("3").tag(3)
                         Text("4").tag(4)
@@ -103,10 +103,11 @@ struct ContentView: View {
         }.presentInterstitialAd(isPresented: $showIntersitialAd, adUnitId: "ca-app-pub-3940256099942544/4411468910")
     }
     func rotate() {
-        self.rand = Int.random(in: 1...num)
-        self.degree += 2160 + Int((360 / num) * rand) + Int((360 / prev_num) * num_cover)
-        self.num_cover = num - rand
-        self.prev_num = num
+        self.randomSelect = Int.random(in: 1...peoples)
+        self.degree += 2160 + Int((360 / peoples) * randomSelect) + Int((360 / previousPeoples) * fixedNumber)
+        self.fixedNumber = peoples - randomSelect
+        //これがないと人数を変えたときに矢印がずれる
+        self.previousPeoples = peoples
     }
 }
 
