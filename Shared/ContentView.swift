@@ -100,7 +100,7 @@ struct ContentView: View {
                 }.padding()
                 Spacer()
             }
-        }.presentInterstitialAd(isPresented: $showIntersitialAd, adUnitId: "ca-app-pub-3940256099942544/4411468910")
+        }.presentInterstitialAd(isPresented: $showIntersitialAd, adUnitId: "")
     }
     func rotate() {
         self.randomSelect = Int.random(in: 1...peoples)
