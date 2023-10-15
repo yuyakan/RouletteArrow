@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B865D572ADC53B700B23C12 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D562ADC53B700B23C12 /* InterstitialAd.swift */; };
+		4B865D582ADC53B700B23C12 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D562ADC53B700B23C12 /* InterstitialAd.swift */; };
 		4BD50E2A27CFAB81000A5A4F /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2927CFAB81000A5A4F /* Tests_iOS.swift */; };
 		4BD50E2C27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2B27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift */; };
 		4BD50E3627CFAB81000A5A4F /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E3527CFAB81000A5A4F /* Tests_macOS.swift */; };
@@ -42,6 +44,7 @@
 		06E158E7AE798EFCCD8BD4A9 /* Pods-RouletteArrow (macOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouletteArrow (macOS).release.xcconfig"; path = "Target Support Files/Pods-RouletteArrow (macOS)/Pods-RouletteArrow (macOS).release.xcconfig"; sourceTree = "<group>"; };
 		1D169DF7C55EC88EB0DB79E8 /* Pods_RouletteArrow__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouletteArrow__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D7928D3F631523DAE08CE5E /* Pods_RouletteArrow__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouletteArrow__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B865D562ADC53B700B23C12 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
 		4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteArrowApp.swift; sourceTree = "<group>"; };
 		4BD50E1227CFAB80000A5A4F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4BD50E1327CFAB81000A5A4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 			children = (
 				4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */,
 				4BD50E1227CFAB80000A5A4F /* ContentView.swift */,
+				4B865D562ADC53B700B23C12 /* InterstitialAd.swift */,
 				4BD50E1327CFAB81000A5A4F /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -401,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BD50E3B27CFAB81000A5A4F /* ContentView.swift in Sources */,
+				4B865D572ADC53B700B23C12 /* InterstitialAd.swift in Sources */,
 				4BD50E3927CFAB81000A5A4F /* RouletteArrowApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +415,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BD50E3C27CFAB81000A5A4F /* ContentView.swift in Sources */,
+				4B865D582ADC53B700B23C12 /* InterstitialAd.swift in Sources */,
 				4BD50E3A27CFAB81000A5A4F /* RouletteArrowApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

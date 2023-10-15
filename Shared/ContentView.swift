@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var showIntersitialAd: Bool = false
+    var interstitial = Interstitial()
     @State private var degree: Int = 0
     @State var randomSelect: Int = 0
     @State var setting: Bool = false
@@ -49,7 +49,7 @@ struct ContentView: View {
                     rotate()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
                         start.toggle()
-                        showIntersitialAd.toggle()
+                        interstitial.presentInterstitial()
                     }
                 },
                        label: {
@@ -100,6 +100,9 @@ struct ContentView: View {
                 }.padding()
                 Spacer()
             }
+        }
+        .onAppear() {
+            interstitial.loadInterstitial()
         }
     }
     func rotate() {
