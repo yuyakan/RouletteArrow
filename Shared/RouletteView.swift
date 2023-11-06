@@ -7,17 +7,10 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct RouletteView: View {
+    @ObservedObject var rouletteViewModel = RouletteViewModel()
     var interstitial = Interstitial()
-    @State private var degree: Int = 0
-    @State var randomSelect: Int = 0
-    @State var setting: Bool = false
-    @State var start: Bool = false
-    @State var separation: Bool = false
-    @State var peoples: Int = 4
-    @State var text: String = "Roullet arrow"
-    @State var fixedNumber: Int = 0
-    @State var previousPeoples: Int = 4
+    
     var body: some View {
         let bouns = UIScreen.main.bounds
         let width = bouns.width
@@ -26,66 +19,66 @@ struct ContentView: View {
             Text(" ").font(.largeTitle).opacity(0)
             Spacer()    
             ZStack{
-                Image("\(peoples)")
+                Image("\(rouletteViewModel.roulettePeoples)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .opacity(separation ? 0.2:0)
+                    .opacity(rouletteViewModel.isVisibleSeparation ? 0.2:0)
                 Image("arrow2")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .rotationEffect(Angle(degrees: Double(degree)))
-                    .animation(Animation.easeOut(duration: 8), value: degree)
-                Text(text).font(.title2).frame(width: width * 0.5)
+                    .rotationEffect(Angle(degrees: Double(rouletteViewModel.rouletteDegree)))
+                    .animation(Animation.easeOut(duration: 8), value: rouletteViewModel.rouletteDegree)
+                Text(rouletteViewModel.rouletteTheme).font(.title2).frame(width: width * 0.5)
             }
             Spacer()
             
             HStack{
-                Toggle(isOn: $setting) {
+                Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
                 }.labelsHidden()
                     .padding()
                 Spacer()
                 Button(action: {
-                    start.toggle()
-                    rotate()
+                    rouletteViewModel.isVisibleStartButton.toggle()
+                    rouletteViewModel.rouletteRotate()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-                        start.toggle()
+                        rouletteViewModel.isVisibleStartButton.toggle()
                         interstitial.presentInterstitial()
                     }
                 },
                        label: {
                     Text("Start").font(.largeTitle)
                 })
-                    .opacity(setting ? 0:1)
+                .opacity(rouletteViewModel.isVisibleSettingValue ? 0:1)
                 Spacer()
-                Toggle(isOn: $setting) {
+                Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
                 }.labelsHidden()
                 .padding()
                 .hidden()
                 .disabled(true)
             }
             .padding(.bottom)
-            .opacity(start ? 0:1)
+            .opacity(rouletteViewModel.isVisibleStartButton ? 0:1)
             
-            if setting {
+            if rouletteViewModel.isVisibleSettingValue {
                 HStack{
                     Text("Theme").font(.title2).padding()
-                    TextField("Placeholder", text: $text)
+                    TextField("Placeholder", text: $rouletteViewModel.rouletteTheme)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                 }
                 HStack{
                     Text("Separation").font(.title2).padding()
                     Spacer()
-                    Toggle(isOn: $separation) {
+                    Toggle(isOn: $rouletteViewModel.isVisibleSeparation) {
                     }.labelsHidden()
                     .padding()
                 }.padding(.bottom)
                 HStack{
-                    Text("\(peoples) people")
+                    Text("peoples")
                         .font(.title2)
                         .padding(.bottom)
                     Spacer()
-                    Picker("Number of people", selection: $peoples) {
+                    Picker("Number of people", selection: $rouletteViewModel.roulettePeoples) {
                         Text("2").tag(2)
                         Text("3").tag(3)
                         Text("4").tag(4)
@@ -105,17 +98,10 @@ struct ContentView: View {
             interstitial.loadInterstitial()
         }
     }
-    func rotate() {
-        self.randomSelect = Int.random(in: 1...peoples)
-        self.degree += 2160 + Int((360 / peoples) * randomSelect) + Int((360 / previousPeoples) * fixedNumber)
-        self.fixedNumber = peoples - randomSelect
-        //これがないと人数を変えたときに矢印がずれる
-        self.previousPeoples = peoples
-    }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        RouletteView()
     }
 }
