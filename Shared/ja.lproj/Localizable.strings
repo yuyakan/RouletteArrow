@@ -6,6 +6,8 @@
   
 */
 "Start" = "スタート";
-"Separation" = "分割線";
+"Separation" = "分割";
 "Peoples" = "人数";
 "Theme" = "テーマ";
+"Setting" = "設定";
+"OK" = "OK";

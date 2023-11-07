@@ -9,14 +9,40 @@ import SwiftUI
 
 struct RouletteView: View {
     @ObservedObject var rouletteViewModel = RouletteViewModel()
+    @State var angle = Angle(degrees: 0.0)
+                
+    var rotation: some Gesture {
+        RotationGesture()
+            .onChanged { angle in
+                self.angle = angle
+        }
+    }
 
     var body: some View {
         let bouns = UIScreen.main.bounds
         let width = bouns.width
         let heigth = bouns.height
         VStack{
-            BannerView().frame(height: 60)
+            HStack{
+                Button(
+                    action: {
+                        rouletteViewModel.setting()
+                    },
+                    label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 36, height: 36)
+                            .foregroundColor(rouletteViewModel.isVisibleSettingValue ? .blue : .black)
+                    }
+                )
+                .padding(.top)
+                .padding()
+                Spacer()
+            }
+            
             Spacer()
+            
             ZStack{
                 Image("arrow2")
                     .resizable()
@@ -26,42 +52,35 @@ struct RouletteView: View {
                 Image("\(rouletteViewModel.peoples)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .rotationEffect(self.angle)
+                    .gesture(rotation)
                     .opacity(rouletteViewModel.isVisibleSeparation ? 0.2:0)
-                Text(rouletteViewModel.rouletteTheme).font(.title2).frame(width: width * 0.5)
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        rouletteViewModel.start()
+                    },
+                           label: {
+                        Text(LocalizedStringKey("Start")).font(.largeTitle)
+                    })
+                    .opacity(rouletteViewModel.isVisibleSettingValue ? 0:1)
+                    Spacer()
+                }
+                .opacity(rouletteViewModel.isVisibleStartButton ? 0:1)
             }
+            
             Spacer()
-            HStack{
-                Spacer()
-                Button(action: {
-                    rouletteViewModel.start()
-                },
-                       label: {
-                    Text(LocalizedStringKey("Start")).font(.largeTitle)
-                })
-                .opacity(rouletteViewModel.isVisibleSettingValue ? 0:1)
-                Spacer()
-            }
-            .padding(.bottom)
-            .opacity(rouletteViewModel.isVisibleStartButton ? 0:1)
-            Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
-            }.labelsHidden()
-                .padding()
+            
             if rouletteViewModel.isVisibleSettingValue {
                 HStack{
-                    Text("Theme").font(.title2).padding()
-                        .padding(.leading)
-                    TextField("Placeholder", text: $rouletteViewModel.rouletteTheme)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                }
-                HStack{
-                    Text(LocalizedStringKey("Separation")).font(.title2).padding()
+                    Text(LocalizedStringKey("Separation")).font(.title2)
+                        .padding([.horizontal, .top])
                         .padding(.leading)
                     Spacer()
                     Toggle(isOn: $rouletteViewModel.isVisibleSeparation) {
                     }.labelsHidden()
-                    .padding()
-                    .padding(.trailing)
+                        .padding([.horizontal, .top])
+                        .padding(.trailing)
                 }
                 HStack{
                     Text(LocalizedStringKey("Peoples"))
@@ -81,9 +100,16 @@ struct RouletteView: View {
                     .frame(width: width * 0.4, height: heigth * 0.1)
                     .padding([.leading,.bottom])
                     Spacer()
-                }.padding()
+                }
+                .padding()
+                .padding(.bottom)
                 Spacer()
             }
+            else {
+                Text(" ").font(.title).opacity(0).frame(height: 60)
+            }
+            
+            BannerView().frame(height: 60)
         }
     }
 }

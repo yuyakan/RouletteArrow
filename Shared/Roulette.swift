@@ -8,12 +8,10 @@
 import Foundation
 
 class Roulette {
-    var text: String
     @Published var rotationDegree: Int
     
-    init(rotationDegree: Int, text: String) {
+    init(rotationDegree: Int) {
         self.rotationDegree = rotationDegree
-        self.text = text
     }
     
     func rotate() {

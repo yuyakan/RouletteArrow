@@ -15,16 +15,7 @@ class RouletteViewModel: ObservableObject {
     private var roulette: Roulette
     
     init() {
-        self.roulette = Roulette(rotationDegree: 0, text: "Roulette")
-    }
-    
-    var rouletteTheme: String {
-        get {
-            roulette.text
-        }
-        set(text) {
-            roulette.text = text
-        }
+        self.roulette = Roulette(rotationDegree: 0)
     }
     
     var rouletteDegree: Int {
@@ -43,5 +34,9 @@ class RouletteViewModel: ObservableObject {
     
     private func rouletteRotate() {
         roulette.rotate()
+    }
+    
+    func setting() {
+        isVisibleSettingValue.toggle()
     }
 }
