@@ -9,76 +9,67 @@ import SwiftUI
 
 struct RouletteView: View {
     @ObservedObject var rouletteViewModel = RouletteViewModel()
-    var interstitial = Interstitial()
-    
+
     var body: some View {
         let bouns = UIScreen.main.bounds
         let width = bouns.width
         let heigth = bouns.height
         VStack{
-            Text(" ").font(.largeTitle).opacity(0)
-            Spacer()    
+            BannerView().frame(height: 60)
+            Spacer()
             ZStack{
-                Image("\(rouletteViewModel.roulettePeoples)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(rouletteViewModel.isVisibleSeparation ? 0.2:0)
                 Image("arrow2")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .rotationEffect(Angle(degrees: Double(rouletteViewModel.rouletteDegree)))
-                    .animation(Animation.easeOut(duration: 8), value: rouletteViewModel.rouletteDegree)
+                    .animation(Animation.easeOut(duration: 12), value: rouletteViewModel.rouletteDegree)
+                Image("\(rouletteViewModel.peoples)")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .opacity(rouletteViewModel.isVisibleSeparation ? 0.2:0)
                 Text(rouletteViewModel.rouletteTheme).font(.title2).frame(width: width * 0.5)
             }
             Spacer()
-            
             HStack{
-                Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
-                }.labelsHidden()
-                    .padding()
                 Spacer()
                 Button(action: {
-                    rouletteViewModel.isVisibleStartButton.toggle()
-                    rouletteViewModel.rouletteRotate()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-                        rouletteViewModel.isVisibleStartButton.toggle()
-                        interstitial.presentInterstitial()
-                    }
+                    rouletteViewModel.start()
                 },
                        label: {
-                    Text("Start").font(.largeTitle)
+                    Text(LocalizedStringKey("Start")).font(.largeTitle)
                 })
                 .opacity(rouletteViewModel.isVisibleSettingValue ? 0:1)
                 Spacer()
-                Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
-                }.labelsHidden()
-                .padding()
-                .hidden()
-                .disabled(true)
             }
             .padding(.bottom)
             .opacity(rouletteViewModel.isVisibleStartButton ? 0:1)
-            
+            Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
+            }.labelsHidden()
+                .padding()
             if rouletteViewModel.isVisibleSettingValue {
                 HStack{
                     Text("Theme").font(.title2).padding()
+                        .padding(.leading)
                     TextField("Placeholder", text: $rouletteViewModel.rouletteTheme)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .padding()
                 }
                 HStack{
-                    Text("Separation").font(.title2).padding()
+                    Text(LocalizedStringKey("Separation")).font(.title2).padding()
+                        .padding(.leading)
                     Spacer()
                     Toggle(isOn: $rouletteViewModel.isVisibleSeparation) {
                     }.labelsHidden()
                     .padding()
-                }.padding(.bottom)
+                    .padding(.trailing)
+                }
                 HStack{
-                    Text("peoples")
+                    Text(LocalizedStringKey("Peoples"))
                         .font(.title2)
                         .padding(.bottom)
+                        .padding(.leading)
                     Spacer()
-                    Picker("Number of people", selection: $rouletteViewModel.roulettePeoples) {
+                    Picker("Number of people", selection: $rouletteViewModel.peoples) {
                         Text("2").tag(2)
                         Text("3").tag(3)
                         Text("4").tag(4)
@@ -93,9 +84,6 @@ struct RouletteView: View {
                 }.padding()
                 Spacer()
             }
-        }
-        .onAppear() {
-            interstitial.loadInterstitial()
         }
     }
 }
