@@ -7,14 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B865D572ADC53B700B23C12 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D562ADC53B700B23C12 /* InterstitialAd.swift */; };
+		4B865D582ADC53B700B23C12 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D562ADC53B700B23C12 /* InterstitialAd.swift */; };
+		4B865D5A2ADCD59200B23C12 /* RouletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D592ADCD59200B23C12 /* RouletteViewModel.swift */; };
+		4B865D5B2ADCD59200B23C12 /* RouletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D592ADCD59200B23C12 /* RouletteViewModel.swift */; };
+		4B8DF0472AF8A19B00BFF8AB /* Roulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */; };
+		4B8DF0482AF8A19B00BFF8AB /* Roulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */; };
+		4B8DF04D2AF8BA9500BFF8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */; };
+		4B8DF04E2AF8BA9500BFF8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */; };
+		4BC70A902AFA82DB001F2E31 /* AppOpenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */; };
+		4BC70A912AFA82DB001F2E31 /* AppOpenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */; };
+		4BC70A932AFA859D001F2E31 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A922AFA859D001F2E31 /* BannerAd.swift */; };
+		4BC70A942AFA859D001F2E31 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A922AFA859D001F2E31 /* BannerAd.swift */; };
 		4BD50E2A27CFAB81000A5A4F /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2927CFAB81000A5A4F /* Tests_iOS.swift */; };
 		4BD50E2C27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2B27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift */; };
 		4BD50E3627CFAB81000A5A4F /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E3527CFAB81000A5A4F /* Tests_macOS.swift */; };
 		4BD50E3827CFAB81000A5A4F /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E3727CFAB81000A5A4F /* Tests_macOSLaunchTests.swift */; };
 		4BD50E3927CFAB81000A5A4F /* RouletteArrowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */; };
 		4BD50E3A27CFAB81000A5A4F /* RouletteArrowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */; };
-		4BD50E3B27CFAB81000A5A4F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1227CFAB80000A5A4F /* ContentView.swift */; };
-		4BD50E3C27CFAB81000A5A4F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1227CFAB80000A5A4F /* ContentView.swift */; };
+		4BD50E3B27CFAB81000A5A4F /* RouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1227CFAB80000A5A4F /* RouletteView.swift */; };
+		4BD50E3C27CFAB81000A5A4F /* RouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1227CFAB80000A5A4F /* RouletteView.swift */; };
 		4BD50E3D27CFAB81000A5A4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD50E1327CFAB81000A5A4F /* Assets.xcassets */; };
 		4BD50E3E27CFAB81000A5A4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD50E1327CFAB81000A5A4F /* Assets.xcassets */; };
 		6B2B1E7B5FCA8DE83DB2FCBC /* Pods_RouletteArrow__macOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D7928D3F631523DAE08CE5E /* Pods_RouletteArrow__macOS_.framework */; };
@@ -42,8 +54,17 @@
 		06E158E7AE798EFCCD8BD4A9 /* Pods-RouletteArrow (macOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouletteArrow (macOS).release.xcconfig"; path = "Target Support Files/Pods-RouletteArrow (macOS)/Pods-RouletteArrow (macOS).release.xcconfig"; sourceTree = "<group>"; };
 		1D169DF7C55EC88EB0DB79E8 /* Pods_RouletteArrow__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouletteArrow__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D7928D3F631523DAE08CE5E /* Pods_RouletteArrow__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouletteArrow__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B865D562ADC53B700B23C12 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
+		4B865D592ADCD59200B23C12 /* RouletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewModel.swift; sourceTree = "<group>"; };
+		4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roulette.swift; sourceTree = "<group>"; };
+		4B8DF04F2AF8BA9500BFF8AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4B8DF0512AF8BAAC00BFF8AB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAd.swift; sourceTree = "<group>"; };
+		4BC70A922AFA859D001F2E31 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
+		4BC70A952AFBBCBC001F2E31 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4BC70A962AFBC44B001F2E31 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteArrowApp.swift; sourceTree = "<group>"; };
-		4BD50E1227CFAB80000A5A4F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4BD50E1227CFAB80000A5A4F /* RouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteView.swift; sourceTree = "<group>"; };
 		4BD50E1327CFAB81000A5A4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4BD50E1827CFAB81000A5A4F /* RouletteArrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouletteArrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD50E1E27CFAB81000A5A4F /* RouletteArrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouletteArrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +133,13 @@
 			isa = PBXGroup;
 			children = (
 				4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */,
-				4BD50E1227CFAB80000A5A4F /* ContentView.swift */,
+				4BD50E1227CFAB80000A5A4F /* RouletteView.swift */,
+				4B865D592ADCD59200B23C12 /* RouletteViewModel.swift */,
+				4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */,
+				4B865D562ADC53B700B23C12 /* InterstitialAd.swift */,
+				4BC70A922AFA859D001F2E31 /* BannerAd.swift */,
+				4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */,
+				4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */,
 				4BD50E1327CFAB81000A5A4F /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -284,6 +311,9 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				"zh-HK",
+				"zh-Hans",
 			);
 			mainGroup = 4BD50E0B27CFAB7F000A5A4F;
 			productRefGroup = 4BD50E1927CFAB81000A5A4F /* Products */;
@@ -304,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BD50E3D27CFAB81000A5A4F /* Assets.xcassets in Resources */,
+				4B8DF04D2AF8BA9500BFF8AB /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BD50E3E27CFAB81000A5A4F /* Assets.xcassets in Resources */,
+				4B8DF04E2AF8BA9500BFF8AB /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +432,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BD50E3B27CFAB81000A5A4F /* ContentView.swift in Sources */,
+				4BD50E3B27CFAB81000A5A4F /* RouletteView.swift in Sources */,
+				4BC70A932AFA859D001F2E31 /* BannerAd.swift in Sources */,
+				4B8DF0472AF8A19B00BFF8AB /* Roulette.swift in Sources */,
+				4BC70A902AFA82DB001F2E31 /* AppOpenAd.swift in Sources */,
+				4B865D572ADC53B700B23C12 /* InterstitialAd.swift in Sources */,
+				4B865D5A2ADCD59200B23C12 /* RouletteViewModel.swift in Sources */,
 				4BD50E3927CFAB81000A5A4F /* RouletteArrowApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,7 +446,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4BD50E3C27CFAB81000A5A4F /* ContentView.swift in Sources */,
+				4BD50E3C27CFAB81000A5A4F /* RouletteView.swift in Sources */,
+				4BC70A942AFA859D001F2E31 /* BannerAd.swift in Sources */,
+				4B8DF0482AF8A19B00BFF8AB /* Roulette.swift in Sources */,
+				4BC70A912AFA82DB001F2E31 /* AppOpenAd.swift in Sources */,
+				4B865D582ADC53B700B23C12 /* InterstitialAd.swift in Sources */,
+				4B865D5B2ADCD59200B23C12 /* RouletteViewModel.swift in Sources */,
 				4BD50E3A27CFAB81000A5A4F /* RouletteArrowApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +488,20 @@
 			targetProxy = 4BD50E3227CFAB81000A5A4F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B8DF04F2AF8BA9500BFF8AB /* en */,
+				4B8DF0512AF8BAAC00BFF8AB /* ja */,
+				4BC70A952AFBBCBC001F2E31 /* zh-HK */,
+				4BC70A962AFBC44B001F2E31 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4BD50E3F27CFAB81000A5A4F /* Debug */ = {
@@ -578,15 +634,14 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kanbe1365.RouletteArrow;
 				PRODUCT_NAME = RouletteArrow;
 				SDKROOT = iphoneos;
@@ -611,15 +666,14 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = kanbe1365.RouletteArrow;
 				PRODUCT_NAME = RouletteArrow;
 				SDKROOT = iphoneos;
