@@ -20,7 +20,7 @@ class AppOpen: NSObject, GADFullScreenContentDelegate, ObservableObject {
     func loadAppOpenAd() {
         let request = GADRequest()
         GADAppOpenAd.load(
-            withAdUnitID: "ca-app-pub-3940256099942544/5662855259",
+            withAdUnitID: "ca-app-pub-3940256099942544/5662855259",//テスト
             request: request,
             orientation: UIInterfaceOrientation.portrait
         ) { appOpenAdIn, _ in

@@ -36,7 +36,6 @@ struct RouletteView: View {
                             .foregroundColor(rouletteViewModel.isVisibleSettingValue ? .blue : .black)
                     }
                 )
-                .padding(.top)
                 .padding()
                 Spacer()
             }
@@ -110,6 +109,7 @@ struct RouletteView: View {
             }
             
             BannerView().frame(height: 60)
+//            Text(" ").font(.title).opacity(0).frame(height: 60)
         }
     }
 }
