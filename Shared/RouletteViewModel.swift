@@ -10,29 +10,12 @@ import Foundation
 class RouletteViewModel: ObservableObject {
     @Published var isVisibleStartButton: Bool = false
     @Published var isVisibleSettingValue = false
-    @Published var isVisibleSeparation = false
-    @Published var roulette: Roulette
+    @Published var isVisibleSeparation = true
+    @Published var peoples = 4
+    private var roulette: Roulette
     
     init() {
-        self.roulette = Roulette(rotationDegree: 0, peoples: 4, text: "Roulette Arrow")
-    }
-    
-    var roulettePeoples: Int {
-        get {
-            roulette.peoples
-        }
-        set(peoples) {
-            roulette.peoples = peoples
-        }
-    }
-    
-    var rouletteTheme: String {
-        get {
-            roulette.text
-        }
-        set(text) {
-            roulette.text = text
-        }
+        self.roulette = Roulette(rotationDegree: 0)
     }
     
     var rouletteDegree: Int {
@@ -41,7 +24,19 @@ class RouletteViewModel: ObservableObject {
         }
     }
     
-    func rouletteRotate() {
+    func start() {
+        isVisibleStartButton.toggle()
+        rouletteRotate()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+            self.isVisibleStartButton.toggle()
+        }
+    }
+    
+    private func rouletteRotate() {
         roulette.rotate()
+    }
+    
+    func setting() {
+        isVisibleSettingValue.toggle()
     }
 }

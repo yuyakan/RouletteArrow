@@ -9,76 +9,85 @@ import SwiftUI
 
 struct RouletteView: View {
     @ObservedObject var rouletteViewModel = RouletteViewModel()
-    var interstitial = Interstitial()
-    
+    @State var angle = Angle(degrees: 0.0)
+                
+    var rotation: some Gesture {
+        RotationGesture()
+            .onChanged { angle in
+                self.angle = angle
+        }
+    }
+
     var body: some View {
         let bouns = UIScreen.main.bounds
         let width = bouns.width
         let heigth = bouns.height
         VStack{
-            Text(" ").font(.largeTitle).opacity(0)
-            Spacer()    
+            HStack{
+                Button(
+                    action: {
+                        rouletteViewModel.setting()
+                    },
+                    label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 36, height: 36)
+                            .foregroundColor(rouletteViewModel.isVisibleSettingValue ? .blue : .black)
+                    }
+                )
+                .padding()
+                Spacer()
+            }
+            
+            Spacer()
+            
             ZStack{
-                Image("\(rouletteViewModel.roulettePeoples)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .opacity(rouletteViewModel.isVisibleSeparation ? 0.2:0)
                 Image("arrow2")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .rotationEffect(Angle(degrees: Double(rouletteViewModel.rouletteDegree)))
-                    .animation(Animation.easeOut(duration: 8), value: rouletteViewModel.rouletteDegree)
-                Text(rouletteViewModel.rouletteTheme).font(.title2).frame(width: width * 0.5)
+                    .animation(Animation.easeOut(duration: 12), value: rouletteViewModel.rouletteDegree)
+                Image("\(rouletteViewModel.peoples)")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .rotationEffect(self.angle)
+                    .gesture(rotation)
+                    .opacity(rouletteViewModel.isVisibleSeparation ? 0.2:0)
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        rouletteViewModel.start()
+                    },
+                           label: {
+                        Text(LocalizedStringKey("Start")).font(.largeTitle)
+                    })
+                    .opacity(rouletteViewModel.isVisibleSettingValue ? 0:1)
+                    Spacer()
+                }
+                .opacity(rouletteViewModel.isVisibleStartButton ? 0:1)
             }
-            Spacer()
             
-            HStack{
-                Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
-                }.labelsHidden()
-                    .padding()
-                Spacer()
-                Button(action: {
-                    rouletteViewModel.isVisibleStartButton.toggle()
-                    rouletteViewModel.rouletteRotate()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-                        rouletteViewModel.isVisibleStartButton.toggle()
-                        interstitial.presentInterstitial()
-                    }
-                },
-                       label: {
-                    Text("Start").font(.largeTitle)
-                })
-                .opacity(rouletteViewModel.isVisibleSettingValue ? 0:1)
-                Spacer()
-                Toggle(isOn: $rouletteViewModel.isVisibleSettingValue) {
-                }.labelsHidden()
-                .padding()
-                .hidden()
-                .disabled(true)
-            }
-            .padding(.bottom)
-            .opacity(rouletteViewModel.isVisibleStartButton ? 0:1)
+            Spacer()
             
             if rouletteViewModel.isVisibleSettingValue {
                 HStack{
-                    Text("Theme").font(.title2).padding()
-                    TextField("Placeholder", text: $rouletteViewModel.rouletteTheme)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                }
-                HStack{
-                    Text("Separation").font(.title2).padding()
+                    Text(LocalizedStringKey("Separation")).font(.title2)
+                        .padding([.horizontal, .top])
+                        .padding(.leading)
                     Spacer()
                     Toggle(isOn: $rouletteViewModel.isVisibleSeparation) {
                     }.labelsHidden()
-                    .padding()
-                }.padding(.bottom)
+                        .padding([.horizontal, .top])
+                        .padding(.trailing)
+                }
                 HStack{
-                    Text("peoples")
+                    Text(LocalizedStringKey("Peoples"))
                         .font(.title2)
                         .padding(.bottom)
+                        .padding(.leading)
                     Spacer()
-                    Picker("Number of people", selection: $rouletteViewModel.roulettePeoples) {
+                    Picker("Number of people", selection: $rouletteViewModel.peoples) {
                         Text("2").tag(2)
                         Text("3").tag(3)
                         Text("4").tag(4)
@@ -90,12 +99,17 @@ struct RouletteView: View {
                     .frame(width: width * 0.4, height: heigth * 0.1)
                     .padding([.leading,.bottom])
                     Spacer()
-                }.padding()
+                }
+                .padding()
+                .padding(.bottom)
                 Spacer()
             }
-        }
-        .onAppear() {
-            interstitial.loadInterstitial()
+            else {
+                Text(" ").font(.title).opacity(0).frame(height: 60)
+            }
+            
+            BannerView().frame(height: 60)
+//            Text(" ").font(.title).opacity(0).frame(height: 60)
         }
     }
 }

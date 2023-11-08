@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  RouletteArrow
+
+  Created by 上別縄祐也 on 2023/11/06.
+  
+*/
+"Start" = "スタート";
+"Separation" = "分割";
+"Peoples" = "人数";
+"Theme" = "テーマ";
+"Setting" = "設定";
+"OK" = "OK";
