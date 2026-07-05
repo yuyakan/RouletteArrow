@@ -38,7 +38,7 @@ struct RouletteArrowApp: App {
     @StateObject var appOpen = AppOpen()
     var body: some Scene {
         WindowGroup {
-            RouletteView()
+            RootTabView()
         }
         .onChange(of: appOpen.appOpenAdLoaded) { newValue in
             appOpen.presentAppOpenAd()

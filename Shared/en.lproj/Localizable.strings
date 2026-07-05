@@ -11,3 +11,19 @@
 "Theme" = "Theme";
 "Setting" = "Setting";
 "OK" = "OK";
+
+"Arrow" = "Arrow";
+"Lottery" = "Roulette";
+"Mode" = "Mode";
+"ArrowModeSingle" = "Normal";
+"ArrowModeMultiple" = "Winners";
+"ArrowModeRanking" = "Ranking";
+"WinnerCount" = "Winners";
+"RankCount" = "Ranks";
+"LotteryModeSingle" = "Normal";
+"LotteryModeMultiple" = "Winners";
+"LotteryModeRanking" = "Ranking";
+"Items" = "Items";
+"ItemPlaceholder" = "Enter a name";
+"AddItem" = "Add item";
+"EditItems" = "Edit items";

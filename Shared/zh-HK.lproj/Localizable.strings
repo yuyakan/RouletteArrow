@@ -11,3 +11,19 @@
 "Theme" = "主题";
 "Setting" = "环境";
 "OK" = "完成";
+
+"Arrow" = "箭嘴";
+"Lottery" = "輪盤";
+"Mode" = "模式";
+"ArrowModeSingle" = "普通";
+"ArrowModeMultiple" = "多人中選";
+"ArrowModeRanking" = "排序";
+"WinnerCount" = "中選人數";
+"RankCount" = "人數";
+"LotteryModeSingle" = "普通";
+"LotteryModeMultiple" = "多人中選";
+"LotteryModeRanking" = "排序";
+"Items" = "項目";
+"ItemPlaceholder" = "輸入名稱";
+"AddItem" = "新增項目";
+"EditItems" = "編輯項目";

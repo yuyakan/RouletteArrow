@@ -11,3 +11,19 @@
 "Theme" = "主题";
 "Setting" = "环境";
 "OK" = "完成";
+
+"Arrow" = "箭头";
+"Lottery" = "轮盘";
+"Mode" = "模式";
+"ArrowModeSingle" = "普通";
+"ArrowModeMultiple" = "多人中选";
+"ArrowModeRanking" = "排序";
+"WinnerCount" = "中选人数";
+"RankCount" = "人数";
+"LotteryModeSingle" = "普通";
+"LotteryModeMultiple" = "多人中选";
+"LotteryModeRanking" = "排序";
+"Items" = "项目";
+"ItemPlaceholder" = "输入名称";
+"AddItem" = "添加项目";
+"EditItems" = "编辑项目";

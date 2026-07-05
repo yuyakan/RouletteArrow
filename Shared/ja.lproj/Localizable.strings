@@ -11,3 +11,19 @@
 "Theme" = "テーマ";
 "Setting" = "設定";
 "OK" = "OK";
+
+"Arrow" = "矢印";
+"Lottery" = "ルーレット";
+"Mode" = "モード";
+"ArrowModeSingle" = "通常";
+"ArrowModeMultiple" = "複数当選";
+"ArrowModeRanking" = "順番決め";
+"WinnerCount" = "当選数";
+"RankCount" = "人数";
+"LotteryModeSingle" = "通常";
+"LotteryModeMultiple" = "複数当選";
+"LotteryModeRanking" = "順番決め";
+"Items" = "項目";
+"ItemPlaceholder" = "名前を入力";
+"AddItem" = "項目を追加";
+"EditItems" = "項目を編集";
