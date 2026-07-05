@@ -50,6 +50,11 @@ class RouletteViewModel: ObservableObject {
     /// start() のほか、本数・モードを変えたときにも振り直す。
     @Published var rankAssignments: [Int] = []
 
+    /// 回転秒数（全タブ共通。変更時は SpinSettings に永続化する）
+    @Published var spinDuration: Int = SpinSettings.duration {
+        didSet { SpinSettings.duration = spinDuration }
+    }
+
     private var roulette: Roulette
     private let interstitial = Interstitial()
     private var startCount = 0
@@ -103,8 +108,16 @@ class RouletteViewModel: ObservableObject {
         if startCount % interstitialFrequency == 0 {
             interstitial.presentInterstitial()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(spinDuration)) {
             self.isVisibleStartButton.toggle()
+        }
+    }
+
+    /// 他タブで秒数が変更されている場合に備えて、共通設定から読み直す。
+    func reloadSpinDuration() {
+        let current = SpinSettings.duration
+        if current != spinDuration {
+            spinDuration = current
         }
     }
 

@@ -27,3 +27,5 @@
 "ItemPlaceholder" = "输入名称";
 "AddItem" = "添加项目";
 "EditItems" = "编辑项目";
+
+"SpinDuration" = "旋转时间(秒)";

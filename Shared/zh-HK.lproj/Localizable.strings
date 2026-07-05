@@ -27,3 +27,5 @@
 "ItemPlaceholder" = "輸入名稱";
 "AddItem" = "新增項目";
 "EditItems" = "編輯項目";
+
+"SpinDuration" = "旋轉時間(秒)";

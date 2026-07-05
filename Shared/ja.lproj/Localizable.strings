@@ -27,3 +27,5 @@
 "ItemPlaceholder" = "名前を入力";
 "AddItem" = "項目を追加";
 "EditItems" = "項目を編集";
+
+"SpinDuration" = "回転時間(秒)";

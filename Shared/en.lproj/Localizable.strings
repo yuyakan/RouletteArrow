@@ -27,3 +27,5 @@
 "ItemPlaceholder" = "Enter a name";
 "AddItem" = "Add item";
 "EditItems" = "Edit items";
+
+"SpinDuration" = "Spin time (sec)";

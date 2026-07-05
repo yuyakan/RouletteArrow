@@ -25,13 +25,6 @@ enum LotteryMode: Int, CaseIterable, Identifiable {
     }
 }
 
-/// セグメント(項目)ごとの抽選結果。盤面上のハイライトに使う。
-/// 順位は番号付きポインタで表すため、ここでは当選有無のみ持つ。
-struct SegmentOutcome {
-    /// 当選かどうか（当選以外は減光する）
-    let isWinner: Bool
-}
-
 class LotteryViewModel: ObservableObject {
     private static let itemsKey = "lottery_items"
 
@@ -45,10 +38,20 @@ class LotteryViewModel: ObservableObject {
     @Published var mode: LotteryMode = .single
     /// 複数当選のときの当選数
     @Published var winnerCount: Int = 2
-    /// 直近の抽選結果。セグメントindex -> 結果。盤面上のハイライト/順位バッジに使う。
-    @Published var segmentResults: [Int: SegmentOutcome] = [:]
     /// 回転中はStartを無効化する
     @Published var isSpinning: Bool = false
+    /// 回転秒数（全タブ共通。変更時は SpinSettings に永続化する）
+    @Published var spinDuration: Int = SpinSettings.duration {
+        didSet { SpinSettings.duration = spinDuration }
+    }
+
+    /// 他タブで秒数が変更されている場合に備えて、共通設定から読み直す。
+    func reloadSpinDuration() {
+        let current = SpinSettings.duration
+        if current != spinDuration {
+            spinDuration = current
+        }
+    }
 
     init() {
         if let saved = UserDefaults.standard.stringArray(forKey: Self.itemsKey), !saved.isEmpty {
@@ -92,54 +95,20 @@ class LotteryViewModel: ObservableObject {
 
     // MARK: - 抽選
 
-    /// 上部固定ポインタは真上(12時=270度方向で扇の開始が右基準)を指す想定。
-    /// 円グラフはセグメント0を0度(右)から時計回りに描画し、ポインタが指す角度は
-    /// 「270 - 回転量」に相当する。ここではその角度から当選indexを算出する。
-    private func pointerDegree() -> Double {
-        // ポインタ位置(真上=270度)から、円グラフの回転ぶんを差し引く
-        SegmentResolver.normalizedDegree(270 - Double(rotationDegree))
-    }
-
     func spin() {
         let targets = validItems
         guard targets.count >= 2, !isSpinning else { return }
 
         isSpinning = true
-        segmentResults = [:]
 
         // 回転量を決める（矢印モードと同様に十分な回転＋乱数）
         let decisionAngle = Int.random(in: 1...3600)
         rotationDegree += 3600 + decisionAngle
 
-        // アニメーション(12秒)完了後に結果を確定する
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12) { [weak self] in
-            self?.finishSpin(targets: targets)
+        // アニメーション完了後に回転状態を解除する。
+        // 当選はポインタが指すセグメントで示すため、結果の保持は不要。
+        DispatchQueue.main.asyncAfter(deadline: .now() + Double(spinDuration)) { [weak self] in
+            self?.isSpinning = false
         }
-    }
-
-    private func finishSpin(targets: [String]) {
-        let count = targets.count
-        var outcomes: [Int: SegmentOutcome] = [:]
-
-        switch mode {
-        case .single:
-            let idx = SegmentResolver.segmentIndex(pointerDegree: pointerDegree(), count: count)
-            outcomes[idx] = SegmentOutcome(isWinner: true)
-
-        case .multiple, .ranking:
-            // 円周上に等間隔で配置した winnerCount 本のポインタが、それぞれ指すセグメントを当選にする。
-            // 順番決めはポインタに順位番号が振ってあるため、判定ロジックは複数当選と共通。
-            // 矢印モードと同じ SegmentResolver.arrowSegmentIndices を流用する。
-            let n = min(max(2, winnerCount), count)
-            let indices = SegmentResolver.arrowSegmentIndices(
-                baseDegree: pointerDegree(), winnerCount: n, count: count
-            )
-            for idx in indices {
-                outcomes[idx] = SegmentOutcome(isWinner: true)
-            }
-        }
-
-        segmentResults = outcomes
-        isSpinning = false
     }
 }

@@ -34,11 +34,12 @@ struct LotteryView: View {
                         .transition(.move(edge: .bottom).combined(with: .opacity))
                 } else {
                     spinButton
-                        .padding(.bottom, 8)
+                        .padding(.bottom, 40)
                 }
             }
             .animation(.easeInOut(duration: 0.25), value: isEditingItems)
         }
+        .onAppear { viewModel.reloadSpinDuration() }
     }
 
     // MARK: - Header
@@ -75,9 +76,9 @@ struct LotteryView: View {
 
     private var wheelStage: some View {
         ZStack {
-            WheelView(items: viewModel.validItems, results: viewModel.segmentResults)
+            WheelView(items: viewModel.validItems)
                 .rotationEffect(Angle(degrees: Double(viewModel.rotationDegree)))
-                .animation(.easeOut(duration: 12), value: viewModel.rotationDegree)
+                .animation(.easeOut(duration: Double(viewModel.spinDuration)), value: viewModel.rotationDegree)
                 .padding(.horizontal, 24)
 
             // 固定ポインタ。通常/順番決めは真上の1本、複数当選は当選数ぶんを円周に等間隔で配置。
@@ -209,6 +210,22 @@ struct LotteryView: View {
                     }
                 }
             }
+
+            Divider().overlay(Color.black.opacity(0.08))
+
+            // 回転秒数（全タブ共通）
+            VStack(alignment: .leading, spacing: 12) {
+                Text(LocalizedStringKey("SpinDuration"))
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(BrandTheme.textPrimary)
+
+                Picker("Spin duration", selection: $viewModel.spinDuration) {
+                    ForEach(SpinSettings.options, id: \.self) { s in
+                        Text("\(s)").tag(s)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+            }
         }
         .padding(20)
         .background(
@@ -225,8 +242,6 @@ struct LotteryView: View {
 /// 項目数に応じて色分けした扇形を描き、各扇にラベル文字を配置する円グラフ。
 private struct WheelView: View {
     let items: [String]
-    /// セグメントindex -> 抽選結果。空なら未抽選（強調なし）。
-    let results: [Int: SegmentOutcome]
 
     /// ブランドカラーを基調にしたセグメント色パレット
     private static let palette: [Color] = [
@@ -238,11 +253,6 @@ private struct WheelView: View {
         Color(red: 0x5E / 255, green: 0xC5 / 255, blue: 0x8B / 255)
     ]
 
-    /// 当選ハイライトのあるモードか（通常/複数当選）。順位バッジのみのモードでは減光しない。
-    private var hasWinnerHighlight: Bool {
-        results.values.contains { $0.isWinner }
-    }
-
     var body: some View {
         GeometryReader { geo in
             let count = max(items.count, 1)
@@ -252,12 +262,10 @@ private struct WheelView: View {
             let step = 360.0 / Double(count)
 
             ZStack {
-                // 扇形本体。当選ハイライトのあるモードでは、当選以外を減光する。
+                // 扇形本体
                 ForEach(0..<count, id: \.self) { i in
-                    let dimmed = hasWinnerHighlight && !(results[i]?.isWinner ?? false)
                     Wedge(startDegree: step * Double(i), endDegree: step * Double(i + 1))
                         .fill(Self.palette[i % Self.palette.count])
-                        .opacity(dimmed ? 0.25 : 1)
                 }
 
                 // ラベル
