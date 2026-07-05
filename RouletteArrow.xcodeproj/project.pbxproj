@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AABBCC0000000000000000003 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = AABBCC0000000000000000002 /* GoogleMobileAds */; };
 		4B865D572ADC53B700B23C12 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D562ADC53B700B23C12 /* InterstitialAd.swift */; };
 		4B865D582ADC53B700B23C12 /* InterstitialAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D562ADC53B700B23C12 /* InterstitialAd.swift */; };
 		4B865D5A2ADCD59200B23C12 /* RouletteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B865D592ADCD59200B23C12 /* RouletteViewModel.swift */; };
@@ -29,8 +30,6 @@
 		4BD50E3C27CFAB81000A5A4F /* RouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1227CFAB80000A5A4F /* RouletteView.swift */; };
 		4BD50E3D27CFAB81000A5A4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD50E1327CFAB81000A5A4F /* Assets.xcassets */; };
 		4BD50E3E27CFAB81000A5A4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD50E1327CFAB81000A5A4F /* Assets.xcassets */; };
-		6B2B1E7B5FCA8DE83DB2FCBC /* Pods_RouletteArrow__macOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D7928D3F631523DAE08CE5E /* Pods_RouletteArrow__macOS_.framework */; };
-		AADF8BF06B09778D4C4A870A /* Pods_RouletteArrow__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D169DF7C55EC88EB0DB79E8 /* Pods_RouletteArrow__iOS_.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,9 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06E158E7AE798EFCCD8BD4A9 /* Pods-RouletteArrow (macOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouletteArrow (macOS).release.xcconfig"; path = "Target Support Files/Pods-RouletteArrow (macOS)/Pods-RouletteArrow (macOS).release.xcconfig"; sourceTree = "<group>"; };
-		1D169DF7C55EC88EB0DB79E8 /* Pods_RouletteArrow__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouletteArrow__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D7928D3F631523DAE08CE5E /* Pods_RouletteArrow__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RouletteArrow__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B865D562ADC53B700B23C12 /* InterstitialAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterstitialAd.swift; sourceTree = "<group>"; };
 		4B865D592ADCD59200B23C12 /* RouletteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewModel.swift; sourceTree = "<group>"; };
 		4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roulette.swift; sourceTree = "<group>"; };
@@ -76,9 +72,6 @@
 		4BD50E3527CFAB81000A5A4F /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		4BD50E3727CFAB81000A5A4F /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		4BD50E4D27D1C336000A5A4F /* RouletteArrow--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RouletteArrow--iOS--Info.plist"; sourceTree = "<group>"; };
-		927841F6BEA058B631CB2600 /* Pods-RouletteArrow (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouletteArrow (iOS).debug.xcconfig"; path = "Target Support Files/Pods-RouletteArrow (iOS)/Pods-RouletteArrow (iOS).debug.xcconfig"; sourceTree = "<group>"; };
-		CC614336D61ECEC576153CA7 /* Pods-RouletteArrow (macOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouletteArrow (macOS).debug.xcconfig"; path = "Target Support Files/Pods-RouletteArrow (macOS)/Pods-RouletteArrow (macOS).debug.xcconfig"; sourceTree = "<group>"; };
-		DDEBFD15859C3EA408C5EC8B /* Pods-RouletteArrow (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RouletteArrow (iOS).release.xcconfig"; path = "Target Support Files/Pods-RouletteArrow (iOS)/Pods-RouletteArrow (iOS).release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AADF8BF06B09778D4C4A870A /* Pods_RouletteArrow__iOS_.framework in Frameworks */,
+				AABBCC0000000000000000003 /* GoogleMobileAds in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B2B1E7B5FCA8DE83DB2FCBC /* Pods_RouletteArrow__macOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,8 +116,6 @@
 				4BD50E2827CFAB81000A5A4F /* Tests iOS */,
 				4BD50E3427CFAB81000A5A4F /* Tests macOS */,
 				4BD50E1927CFAB81000A5A4F /* Products */,
-				5327EFE34C9E4A951BEE8601 /* Pods */,
-				C9B9C6B24F77B92F948C96B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -182,26 +172,6 @@
 			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
-		5327EFE34C9E4A951BEE8601 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				927841F6BEA058B631CB2600 /* Pods-RouletteArrow (iOS).debug.xcconfig */,
-				DDEBFD15859C3EA408C5EC8B /* Pods-RouletteArrow (iOS).release.xcconfig */,
-				CC614336D61ECEC576153CA7 /* Pods-RouletteArrow (macOS).debug.xcconfig */,
-				06E158E7AE798EFCCD8BD4A9 /* Pods-RouletteArrow (macOS).release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		C9B9C6B24F77B92F948C96B2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1D169DF7C55EC88EB0DB79E8 /* Pods_RouletteArrow__iOS_.framework */,
-				2D7928D3F631523DAE08CE5E /* Pods_RouletteArrow__macOS_.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -209,17 +179,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4BD50E4127CFAB81000A5A4F /* Build configuration list for PBXNativeTarget "RouletteArrow (iOS)" */;
 			buildPhases = (
-				9DDE27D023CB5FA76E697FF7 /* [CP] Check Pods Manifest.lock */,
 				4BD50E1427CFAB81000A5A4F /* Sources */,
 				4BD50E1527CFAB81000A5A4F /* Frameworks */,
 				4BD50E1627CFAB81000A5A4F /* Resources */,
-				4AFE79F9716BC99E1446F0BA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "RouletteArrow (iOS)";
+			packageProductDependencies = (
+				AABBCC0000000000000000002 /* GoogleMobileAds */,
+			);
 			productName = "RouletteArrow (iOS)";
 			productReference = 4BD50E1827CFAB81000A5A4F /* RouletteArrow.app */;
 			productType = "com.apple.product-type.application";
@@ -228,7 +199,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4BD50E4427CFAB81000A5A4F /* Build configuration list for PBXNativeTarget "RouletteArrow (macOS)" */;
 			buildPhases = (
-				F96FBA1365ABEF9F5CF8A279 /* [CP] Check Pods Manifest.lock */,
 				4BD50E1A27CFAB81000A5A4F /* Sources */,
 				4BD50E1B27CFAB81000A5A4F /* Frameworks */,
 				4BD50E1C27CFAB81000A5A4F /* Resources */,
@@ -316,6 +286,9 @@
 				"zh-Hans",
 			);
 			mainGroup = 4BD50E0B27CFAB7F000A5A4F;
+			packageReferences = (
+				AABBCC0000000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+			);
 			productRefGroup = 4BD50E1927CFAB81000A5A4F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -362,70 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4AFE79F9716BC99E1446F0BA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RouletteArrow (iOS)/Pods-RouletteArrow (iOS)-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RouletteArrow (iOS)/Pods-RouletteArrow (iOS)-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RouletteArrow (iOS)/Pods-RouletteArrow (iOS)-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9DDE27D023CB5FA76E697FF7 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RouletteArrow (iOS)-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F96FBA1365ABEF9F5CF8A279 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RouletteArrow (macOS)-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4BD50E1427CFAB81000A5A4F /* Sources */ = {
@@ -621,7 +530,6 @@
 		};
 		4BD50E4227CFAB81000A5A4F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 927841F6BEA058B631CB2600 /* Pods-RouletteArrow (iOS).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -653,7 +561,6 @@
 		};
 		4BD50E4327CFAB81000A5A4F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDEBFD15859C3EA408C5EC8B /* Pods-RouletteArrow (iOS).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -686,7 +593,6 @@
 		};
 		4BD50E4527CFAB81000A5A4F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC614336D61ECEC576153CA7 /* Pods-RouletteArrow (macOS).debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -717,7 +623,6 @@
 		};
 		4BD50E4627CFAB81000A5A4F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06E158E7AE798EFCCD8BD4A9 /* Pods-RouletteArrow (macOS).release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -876,6 +781,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AABBCC0000000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AABBCC0000000000000000002 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AABBCC0000000000000000001 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4BD50E0C27CFAB7F000A5A4F /* Project object */;
 }

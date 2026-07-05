@@ -8,18 +8,20 @@
 import GoogleMobileAds
 import SwiftUI
 
-struct BannerView: UIViewControllerRepresentable {
+struct BannerAdView: UIViewControllerRepresentable {
     func makeUIViewController(context _: Context) -> UIViewController {
-        let viewController = GADBannerViewController()
+        let viewController = BannerAdViewController()
         return viewController
     }
 
     func updateUIViewController(_: UIViewController, context _: Context) {}
 }
 
-class GADBannerViewController: UIViewController, GADBannerViewDelegate {
-    var bannerView: GADBannerView!
+class BannerAdViewController: UIViewController, BannerViewDelegate {
+    var bannerView: BannerView!
     let adUnitID = "ca-app-pub-3940256099942544/2934735716"//テスト
+    private var retryCount = 0
+    private let maxRetryCount = 5
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,23 +41,23 @@ class GADBannerViewController: UIViewController, GADBannerViewDelegate {
     }
 
     private func loadBanner() {
-        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView = BannerView(adSize: AdSizeBanner)
         bannerView.adUnitID = adUnitID
 
         bannerView.delegate = self
         bannerView.rootViewController = self
 
         let bannerWidth = view.frame.size.width
-        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(bannerWidth)
+        bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(width: bannerWidth)
 
-        let request = GADRequest()
+        let request = Request()
         request.scene = view.window?.windowScene
         bannerView.load(request)
 
         setAdView(bannerView)
     }
 
-    func setAdView(_ view: GADBannerView) {
+    func setAdView(_ view: BannerView) {
         bannerView = view
         self.view.addSubview(bannerView)
         bannerView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,5 +74,28 @@ class GADBannerViewController: UIViewController, GADBannerViewDelegate {
                 options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: viewDictionary
             )
         )
+    }
+
+    // 読み込み成功通知
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+        retryCount = 0
+    }
+
+    // 読み込み失敗通知：指数バックオフによるリトライ（最大 maxRetryCount 回）
+    func bannerView(_ bannerView: BannerView, didFailToReceiveAdWithError error: Error) {
+        print("バナー広告の読み込みに失敗しました: \(error.localizedDescription)")
+        guard retryCount < maxRetryCount else {
+            print("バナー広告の読み込みを \(maxRetryCount) 回試みましたが失敗しました")
+            return
+        }
+        retryCount += 1
+        let delay = pow(2.0, Double(retryCount - 1))
+        print("バナー広告を \(delay) 秒後に再読み込みします（\(retryCount)/\(maxRetryCount)）")
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+            guard let self else { return }
+            let request = Request()
+            request.scene = self.view.window?.windowScene
+            self.bannerView.load(request)
+        }
     }
 }

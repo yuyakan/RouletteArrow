@@ -108,7 +108,7 @@ struct RouletteView: View {
                 Text(" ").font(.title).opacity(0).frame(height: 60)
             }
             
-            BannerView().frame(height: 60)
+            BannerAdView().frame(height: 60)
 //            Text(" ").font(.title).opacity(0).frame(height: 60)
         }
     }

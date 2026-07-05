@@ -14,7 +14,7 @@ import GoogleMobileAds
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Mobile Ads SDKを初期化する
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        MobileAds.shared.start(completionHandler: nil)
         return true
     }
 }
@@ -30,7 +30,7 @@ struct RouletteArrowApp: App {
                 ATTrackingManager.requestTrackingAuthorization { status in
                     //Whether or not user has opted in initialize GADMobileAds here it will handle the rest
                                                                 
-                    GADMobileAds.sharedInstance().start(completionHandler: nil)
+                    MobileAds.shared.start(completionHandler: nil)
                 }
             }
         }
