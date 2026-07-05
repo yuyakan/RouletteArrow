@@ -49,10 +49,11 @@ struct RouletteView: View {
 
     private var header: some View {
         HStack {
+            Spacer()
             Button(
                 action: { rouletteViewModel.setting() },
                 label: {
-                    Image(systemName: "slider.horizontal.3")
+                    Image(systemName: "list.bullet")
                         .font(.system(size: 22, weight: .semibold))
                         .foregroundColor(rouletteViewModel.isVisibleSettingValue ? BrandTheme.mint : BrandTheme.textPrimary)
                         .frame(width: 48, height: 48)
@@ -69,10 +70,8 @@ struct RouletteView: View {
                         )
                 }
             )
-            .padding(.leading)
+            .padding(.trailing)
             .padding(.top, 8)
-
-            Spacer()
         }
     }
 

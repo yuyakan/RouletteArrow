@@ -25,13 +25,11 @@ enum LotteryMode: Int, CaseIterable, Identifiable {
     }
 }
 
-/// 抽選結果
-struct LotteryResult: Identifiable {
-    let id = UUID()
-    /// 順位（1始まり）。single/multiple では表示順の便宜値。
-    let rank: Int
-    /// 当選した項目名
-    let name: String
+/// セグメント(項目)ごとの抽選結果。盤面上のハイライトに使う。
+/// 順位は番号付きポインタで表すため、ここでは当選有無のみ持つ。
+struct SegmentOutcome {
+    /// 当選かどうか（当選以外は減光する）
+    let isWinner: Bool
 }
 
 class LotteryViewModel: ObservableObject {
@@ -47,8 +45,8 @@ class LotteryViewModel: ObservableObject {
     @Published var mode: LotteryMode = .single
     /// 複数当選のときの当選数
     @Published var winnerCount: Int = 2
-    /// 直近の抽選結果
-    @Published var results: [LotteryResult] = []
+    /// 直近の抽選結果。セグメントindex -> 結果。盤面上のハイライト/順位バッジに使う。
+    @Published var segmentResults: [Int: SegmentOutcome] = [:]
     /// 回転中はStartを無効化する
     @Published var isSpinning: Bool = false
 
@@ -107,7 +105,7 @@ class LotteryViewModel: ObservableObject {
         guard targets.count >= 2, !isSpinning else { return }
 
         isSpinning = true
-        results = []
+        segmentResults = [:]
 
         // 回転量を決める（矢印モードと同様に十分な回転＋乱数）
         let decisionAngle = Int.random(in: 1...3600)
@@ -121,31 +119,27 @@ class LotteryViewModel: ObservableObject {
 
     private func finishSpin(targets: [String]) {
         let count = targets.count
-        let winningIndex = SegmentResolver.segmentIndex(pointerDegree: pointerDegree(), count: count)
+        var outcomes: [Int: SegmentOutcome] = [:]
 
         switch mode {
         case .single:
-            results = [LotteryResult(rank: 1, name: targets[winningIndex])]
+            let idx = SegmentResolver.segmentIndex(pointerDegree: pointerDegree(), count: count)
+            outcomes[idx] = SegmentOutcome(isWinner: true)
 
-        case .multiple:
-            // 当選indexを起点に、時計回りへ等間隔で winnerCount 件を選ぶ
+        case .multiple, .ranking:
+            // 円周上に等間隔で配置した winnerCount 本のポインタが、それぞれ指すセグメントを当選にする。
+            // 順番決めはポインタに順位番号が振ってあるため、判定ロジックは複数当選と共通。
+            // 矢印モードと同じ SegmentResolver.arrowSegmentIndices を流用する。
             let n = min(max(2, winnerCount), count)
-            let step = max(1, count / n)
-            var chosen: [String] = []
-            var idx = winningIndex
-            for _ in 0..<n {
-                chosen.append(targets[idx % count])
-                idx += step
-            }
-            results = chosen.enumerated().map { LotteryResult(rank: $0.offset + 1, name: $0.element) }
-
-        case .ranking:
-            // 当選indexを1位とし、時計回りに順位を割り当てる
-            results = (0..<count).map { i in
-                LotteryResult(rank: i + 1, name: targets[(winningIndex + i) % count])
+            let indices = SegmentResolver.arrowSegmentIndices(
+                baseDegree: pointerDegree(), winnerCount: n, count: count
+            )
+            for idx in indices {
+                outcomes[idx] = SegmentOutcome(isWinner: true)
             }
         }
 
+        segmentResults = outcomes
         isSpinning = false
     }
 }
