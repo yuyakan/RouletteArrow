@@ -24,6 +24,8 @@
 		4BSEGRE010000000000000002 /* SegmentResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BSEGRE010000000000000000 /* SegmentResolver.swift */; };
 		4BSPINS010000000000000001 /* SpinSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BSPINS010000000000000000 /* SpinSettings.swift */; };
 		4BSPINS010000000000000002 /* SpinSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BSPINS010000000000000000 /* SpinSettings.swift */; };
+		4BADMGR010000000000000001 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BADMGR010000000000000000 /* AdManager.swift */; };
+		4BADMGR010000000000000002 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BADMGR010000000000000000 /* AdManager.swift */; };
 		4BROOTV010000000000000001 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BROOTV010000000000000000 /* RootTabView.swift */; };
 		4BROOTV010000000000000002 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BROOTV010000000000000000 /* RootTabView.swift */; };
 		4BLOTVM010000000000000001 /* LotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BLOTVM010000000000000000 /* LotteryViewModel.swift */; };
@@ -69,6 +71,7 @@
 		4BBRAND010000000000000000 /* BrandTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandTheme.swift; sourceTree = "<group>"; };
 		4BSEGRE010000000000000000 /* SegmentResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentResolver.swift; sourceTree = "<group>"; };
 		4BSPINS010000000000000000 /* SpinSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinSettings.swift; sourceTree = "<group>"; };
+		4BADMGR010000000000000000 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		4BROOTV010000000000000000 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		4BLOTVM010000000000000000 /* LotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewModel.swift; sourceTree = "<group>"; };
 		4BLOTVW010000000000000000 /* LotteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryView.swift; sourceTree = "<group>"; };
@@ -145,6 +148,7 @@
 				4BBRAND010000000000000000 /* BrandTheme.swift */,
 				4BSEGRE010000000000000000 /* SegmentResolver.swift */,
 				4BSPINS010000000000000000 /* SpinSettings.swift */,
+				4BADMGR010000000000000000 /* AdManager.swift */,
 				4BROOTV010000000000000000 /* RootTabView.swift */,
 				4BLOTVM010000000000000000 /* LotteryViewModel.swift */,
 				4BLOTVW010000000000000000 /* LotteryView.swift */,
@@ -365,6 +369,7 @@
 				4BBRAND010000000000000001 /* BrandTheme.swift in Sources */,
 				4BSEGRE010000000000000001 /* SegmentResolver.swift in Sources */,
 				4BSPINS010000000000000001 /* SpinSettings.swift in Sources */,
+				4BADMGR010000000000000001 /* AdManager.swift in Sources */,
 				4BROOTV010000000000000001 /* RootTabView.swift in Sources */,
 				4BLOTVM010000000000000001 /* LotteryViewModel.swift in Sources */,
 				4BLOTVW010000000000000001 /* LotteryView.swift in Sources */,
@@ -384,6 +389,7 @@
 				4BBRAND010000000000000002 /* BrandTheme.swift in Sources */,
 				4BSEGRE010000000000000002 /* SegmentResolver.swift in Sources */,
 				4BSPINS010000000000000002 /* SpinSettings.swift in Sources */,
+				4BADMGR010000000000000002 /* AdManager.swift in Sources */,
 				4BROOTV010000000000000002 /* RootTabView.swift in Sources */,
 				4BLOTVM010000000000000002 /* LotteryViewModel.swift in Sources */,
 				4BLOTVW010000000000000002 /* LotteryView.swift in Sources */,

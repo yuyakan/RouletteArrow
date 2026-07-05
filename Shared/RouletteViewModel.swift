@@ -56,13 +56,9 @@ class RouletteViewModel: ObservableObject {
     }
 
     private var roulette: Roulette
-    private let interstitial = Interstitial()
-    private var startCount = 0
-    private let interstitialFrequency = 5
 
     init() {
         self.roulette = Roulette(rotationDegree: 0)
-        interstitial.loadInterstitial()
     }
 
     var rouletteDegree: Int {
@@ -104,10 +100,7 @@ class RouletteViewModel: ObservableObject {
         // 回すたびに順位の並びをシャッフルして各矢印へ割り当てる
         shuffleRanksIfNeeded()
         rouletteRotate()
-        startCount += 1
-        if startCount % interstitialFrequency == 0 {
-            interstitial.presentInterstitial()
-        }
+        AdManager.shared.notifySpin()
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(spinDuration)) {
             self.isVisibleStartButton.toggle()
         }

@@ -100,6 +100,7 @@ class LotteryViewModel: ObservableObject {
         guard targets.count >= 2, !isSpinning else { return }
 
         isSpinning = true
+        AdManager.shared.notifySpin()
 
         // 回転量を決める（矢印モードと同様に十分な回転＋乱数）
         let decisionAngle = Int.random(in: 1...3600)
