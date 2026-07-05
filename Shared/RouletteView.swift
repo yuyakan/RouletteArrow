@@ -38,8 +38,6 @@ struct RouletteView: View {
                 } else {
                     Color.clear.frame(height: 60)
                 }
-
-                BannerAdView().frame(height: 60)
             }
             .animation(.easeInOut(duration: 0.25), value: rouletteViewModel.isVisibleSettingValue)
         }

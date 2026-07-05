@@ -22,7 +22,9 @@ struct LotteryView: View {
 
                 Spacer(minLength: 8)
 
+                // 設定パネル表示中は盤面を小さくしてパネル領域を広げる
                 wheelStage
+                    .frame(maxHeight: isEditingItems ? 220 : .infinity)
 
                 Spacer(minLength: 8)
 
@@ -34,8 +36,6 @@ struct LotteryView: View {
                     spinButton
                         .padding(.bottom, 8)
                 }
-
-                BannerAdView().frame(height: 60)
             }
             .animation(.easeInOut(duration: 0.25), value: isEditingItems)
         }

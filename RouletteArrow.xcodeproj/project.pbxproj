@@ -18,8 +18,6 @@
 		4B8DF04E2AF8BA9500BFF8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */; };
 		4BC70A902AFA82DB001F2E31 /* AppOpenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */; };
 		4BC70A912AFA82DB001F2E31 /* AppOpenAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */; };
-		4BC70A932AFA859D001F2E31 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A922AFA859D001F2E31 /* BannerAd.swift */; };
-		4BC70A942AFA859D001F2E31 /* BannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC70A922AFA859D001F2E31 /* BannerAd.swift */; };
 		4BBRAND010000000000000001 /* BrandTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBRAND010000000000000000 /* BrandTheme.swift */; };
 		4BBRAND010000000000000002 /* BrandTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBRAND010000000000000000 /* BrandTheme.swift */; };
 		4BSEGRE010000000000000001 /* SegmentResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BSEGRE010000000000000000 /* SegmentResolver.swift */; };
@@ -66,7 +64,6 @@
 		4B8DF04F2AF8BA9500BFF8AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4B8DF0512AF8BAAC00BFF8AB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOpenAd.swift; sourceTree = "<group>"; };
-		4BC70A922AFA859D001F2E31 /* BannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAd.swift; sourceTree = "<group>"; };
 		4BBRAND010000000000000000 /* BrandTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandTheme.swift; sourceTree = "<group>"; };
 		4BSEGRE010000000000000000 /* SegmentResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentResolver.swift; sourceTree = "<group>"; };
 		4BROOTV010000000000000000 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
@@ -142,7 +139,6 @@
 				4B865D592ADCD59200B23C12 /* RouletteViewModel.swift */,
 				4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */,
 				4B865D562ADC53B700B23C12 /* InterstitialAd.swift */,
-				4BC70A922AFA859D001F2E31 /* BannerAd.swift */,
 				4BBRAND010000000000000000 /* BrandTheme.swift */,
 				4BSEGRE010000000000000000 /* SegmentResolver.swift */,
 				4BROOTV010000000000000000 /* RootTabView.swift */,
@@ -367,7 +363,6 @@
 				4BROOTV010000000000000001 /* RootTabView.swift in Sources */,
 				4BLOTVM010000000000000001 /* LotteryViewModel.swift in Sources */,
 				4BLOTVW010000000000000001 /* LotteryView.swift in Sources */,
-				4BC70A932AFA859D001F2E31 /* BannerAd.swift in Sources */,
 				4B8DF0472AF8A19B00BFF8AB /* Roulette.swift in Sources */,
 				4BC70A902AFA82DB001F2E31 /* AppOpenAd.swift in Sources */,
 				4B865D572ADC53B700B23C12 /* InterstitialAd.swift in Sources */,
@@ -386,7 +381,6 @@
 				4BROOTV010000000000000002 /* RootTabView.swift in Sources */,
 				4BLOTVM010000000000000002 /* LotteryViewModel.swift in Sources */,
 				4BLOTVW010000000000000002 /* LotteryView.swift in Sources */,
-				4BC70A942AFA859D001F2E31 /* BannerAd.swift in Sources */,
 				4B8DF0482AF8A19B00BFF8AB /* Roulette.swift in Sources */,
 				4BC70A912AFA82DB001F2E31 /* AppOpenAd.swift in Sources */,
 				4B865D582ADC53B700B23C12 /* InterstitialAd.swift in Sources */,
