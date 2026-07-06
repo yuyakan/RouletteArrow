@@ -11,6 +11,8 @@ import SwiftUI
 struct AmidaView: View {
     @StateObject private var viewModel = AmidaViewModel()
     @State private var isEditing = false
+    /// スタートが押されてあみだくじを表示したか。押すまでは縦線・横棒を隠す。
+    @State private var hasStarted = false
 
     /// 上段レーンごとの経路色。lane index を色数で割った余りで割り当てる。
     private static let lanePalette: [Color] = [
@@ -32,6 +34,10 @@ struct AmidaView: View {
     /// 経路を表示対象に加えて、線を引くアニメーションを走らせる。
     private func startTrace(_ addPaths: () -> Bool) {
         guard addPaths(), !viewModel.isTracing else { return }
+        // スタート時にあみだくじ（縦線・横棒）を表示する。
+        if !hasStarted {
+            withAnimation(.easeInOut(duration: 0.2)) { hasStarted = true }
+        }
         // まず進捗を 0 に戻す（アニメーションなしで即反映）。
         var reset = Transaction()
         reset.disablesAnimations = true
@@ -82,7 +88,14 @@ struct AmidaView: View {
         HStack {
             Spacer()
             Button(
-                action: { isEditing.toggle() },
+                action: {
+                    // 編集を開くときはスタート前の状態に戻す（項目変更で経路が無効になるため）
+                    if !isEditing {
+                        viewModel.clearTrace()
+                        hasStarted = false
+                    }
+                    isEditing.toggle()
+                },
                 label: {
                     Image(systemName: "list.bullet")
                         .font(.system(size: 22, weight: .semibold))
@@ -113,13 +126,25 @@ struct AmidaView: View {
             // 上段：参加者（タップで経路をたどる）
             laneLabels(labels: viewModel.participants, isTop: true)
 
-            LadderView(
-                laneCount: viewModel.laneCount,
-                rungs: viewModel.rungs,
-                tracedPaths: viewModel.tracedPaths,
-                progress: viewModel.drawProgress,
-                color: { Self.color(for: $0) }
-            )
+            // スタートを押すまではあみだくじ（縦線・横棒）を隠す。
+            ZStack {
+                if hasStarted {
+                    LadderView(
+                        laneCount: viewModel.laneCount,
+                        rungs: viewModel.rungs,
+                        tracedPaths: viewModel.tracedPaths,
+                        progress: viewModel.drawProgress,
+                        color: { Self.color(for: $0) }
+                    )
+                    .transition(.opacity)
+                } else {
+                    // 未スタート時のプレースホルダー（タップ導線のヒント）
+                    Text(LocalizedStringKey("AmidaTapStart"))
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(BrandTheme.textPrimary.opacity(0.35))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
 
             // 下段：結果。たどり着いた lane を強調する。
             laneLabels(labels: viewModel.results, isTop: false)
@@ -178,8 +203,11 @@ struct AmidaView: View {
 
     private var controls: some View {
         HStack(spacing: 16) {
-            // 引き直し（横棒をランダムに再生成）
-            Button(action: { viewModel.regenerate() }) {
+            // 引き直し（横棒をランダムに再生成）。スタート前の状態に戻す。
+            Button(action: {
+                viewModel.regenerate()
+                withAnimation(.easeInOut(duration: 0.2)) { hasStarted = false }
+            }) {
                 Image(systemName: "shuffle")
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(BrandTheme.mint)
@@ -193,9 +221,9 @@ struct AmidaView: View {
             }
             .disabled(viewModel.isTracing)
 
-            // 全員ぶんの経路を一度に引く
+            // スタート：全員ぶんの経路を一度に引く
             Button(action: { startTrace { viewModel.traceAll() } }) {
-                Text(LocalizedStringKey("AmidaAll"))
+                Text(LocalizedStringKey("Start"))
                     .font(.system(size: 20, weight: .semibold, design: .rounded))
                     .foregroundColor(.white)
                     .padding(.horizontal, 32)
@@ -204,8 +232,11 @@ struct AmidaView: View {
             }
             .disabled(!canTraceAll || viewModel.isTracing)
 
-            // 経路のクリア
-            Button(action: { viewModel.clearTrace() }) {
+            // 経路のクリア。スタート前の状態に戻す。
+            Button(action: {
+                viewModel.clearTrace()
+                withAnimation(.easeInOut(duration: 0.2)) { hasStarted = false }
+            }) {
                 Image(systemName: "arrow.counterclockwise")
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(BrandTheme.mint)
