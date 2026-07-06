@@ -126,7 +126,7 @@ struct AmidaView: View {
             // 上段：参加者（タップで経路をたどる）
             laneLabels(labels: viewModel.participants, isTop: true)
 
-            // スタートを押すまではあみだくじ（縦線・横棒）を隠す。
+            // スタートを押すまではあみだくじ本体（横棒）を隠し、縦線の上端・下端だけをちら見せする。
             ZStack {
                 if hasStarted {
                     LadderView(
@@ -138,11 +138,19 @@ struct AmidaView: View {
                     )
                     .transition(.opacity)
                 } else {
-                    // 未スタート時のプレースホルダー（タップ導線のヒント）
+                    // 縦線の上部・株（根元）だけを見せる
+                    LadderView(
+                        laneCount: viewModel.laneCount,
+                        rungs: viewModel.rungs,
+                        tracedPaths: [:],
+                        progress: 0,
+                        color: { Self.color(for: $0) },
+                        stubOnly: true
+                    )
+                    // タップ導線のヒントを中央に重ねる
                     Text(LocalizedStringKey("AmidaTapStart"))
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundColor(BrandTheme.textPrimary.opacity(0.35))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
 
@@ -330,6 +338,11 @@ private struct LadderView: View {
     let progress: CGFloat
     /// 開始レーンごとの色。
     let color: (Int) -> Color
+    /// true のときは縦線の上端・下端の短い区間だけを描く（スタート前のちら見せ）。
+    var stubOnly: Bool = false
+
+    /// ちら見せ時に見せる縦線の長さ（上端・下端それぞれ）。
+    private let stubLength: CGFloat = 24
 
     var body: some View {
         GeometryReader { geo in
@@ -345,24 +358,34 @@ private struct LadderView: View {
             let yForRow: (Int) -> CGFloat = { top + rowSpacing * (CGFloat($0) + 0.5) }
 
             ZStack {
-                // 縦線
+                // 縦線。ちら見せ時は上端・下端の短い区間だけを描く。
                 ForEach(0..<lanes, id: \.self) { lane in
                     Path { p in
-                        p.move(to: CGPoint(x: xForLane(lane), y: top))
-                        p.addLine(to: CGPoint(x: xForLane(lane), y: bottom))
+                        let x = xForLane(lane)
+                        if stubOnly {
+                            p.move(to: CGPoint(x: x, y: top))
+                            p.addLine(to: CGPoint(x: x, y: min(top + stubLength, bottom)))
+                            p.move(to: CGPoint(x: x, y: max(bottom - stubLength, top)))
+                            p.addLine(to: CGPoint(x: x, y: bottom))
+                        } else {
+                            p.move(to: CGPoint(x: x, y: top))
+                            p.addLine(to: CGPoint(x: x, y: bottom))
+                        }
                     }
                     .stroke(Color.black.opacity(0.18), lineWidth: 3)
                 }
 
-                // 横棒
-                ForEach(0..<rowCount, id: \.self) { row in
-                    ForEach(rungs[row], id: \.self) { lane in
-                        Path { p in
-                            let y = yForRow(row)
-                            p.move(to: CGPoint(x: xForLane(lane), y: y))
-                            p.addLine(to: CGPoint(x: xForLane(lane + 1), y: y))
+                // 横棒（ちら見せ時は描かない）
+                if !stubOnly {
+                    ForEach(0..<rowCount, id: \.self) { row in
+                        ForEach(rungs[row], id: \.self) { lane in
+                            Path { p in
+                                let y = yForRow(row)
+                                p.move(to: CGPoint(x: xForLane(lane), y: y))
+                                p.addLine(to: CGPoint(x: xForLane(lane + 1), y: y))
+                            }
+                            .stroke(Color.black.opacity(0.18), lineWidth: 3)
                         }
-                        .stroke(Color.black.opacity(0.18), lineWidth: 3)
                     }
                 }
 
