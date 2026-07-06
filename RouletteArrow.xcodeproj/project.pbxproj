@@ -32,6 +32,10 @@
 		4BLOTVM010000000000000002 /* LotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BLOTVM010000000000000000 /* LotteryViewModel.swift */; };
 		4BLOTVW010000000000000001 /* LotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BLOTVW010000000000000000 /* LotteryView.swift */; };
 		4BLOTVW010000000000000002 /* LotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BLOTVW010000000000000000 /* LotteryView.swift */; };
+		4BAMDVM010000000000000001 /* AmidaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVM010000000000000000 /* AmidaViewModel.swift */; };
+		4BAMDVM010000000000000002 /* AmidaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVM010000000000000000 /* AmidaViewModel.swift */; };
+		4BAMDVW010000000000000001 /* AmidaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVW010000000000000000 /* AmidaView.swift */; };
+		4BAMDVW010000000000000002 /* AmidaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVW010000000000000000 /* AmidaView.swift */; };
 		4BD50E2A27CFAB81000A5A4F /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2927CFAB81000A5A4F /* Tests_iOS.swift */; };
 		4BD50E2C27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2B27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift */; };
 		4BD50E3627CFAB81000A5A4F /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E3527CFAB81000A5A4F /* Tests_macOS.swift */; };
@@ -75,6 +79,8 @@
 		4BROOTV010000000000000000 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		4BLOTVM010000000000000000 /* LotteryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryViewModel.swift; sourceTree = "<group>"; };
 		4BLOTVW010000000000000000 /* LotteryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LotteryView.swift; sourceTree = "<group>"; };
+		4BAMDVM010000000000000000 /* AmidaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmidaViewModel.swift; sourceTree = "<group>"; };
+		4BAMDVW010000000000000000 /* AmidaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmidaView.swift; sourceTree = "<group>"; };
 		4BC70A952AFBBCBC001F2E31 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4BC70A962AFBC44B001F2E31 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteArrowApp.swift; sourceTree = "<group>"; };
@@ -152,6 +158,8 @@
 				4BROOTV010000000000000000 /* RootTabView.swift */,
 				4BLOTVM010000000000000000 /* LotteryViewModel.swift */,
 				4BLOTVW010000000000000000 /* LotteryView.swift */,
+				4BAMDVM010000000000000000 /* AmidaViewModel.swift */,
+				4BAMDVW010000000000000000 /* AmidaView.swift */,
 				4BC70A8F2AFA82DB001F2E31 /* AppOpenAd.swift */,
 				4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */,
 				4BD50E1327CFAB81000A5A4F /* Assets.xcassets */,
@@ -373,6 +381,8 @@
 				4BROOTV010000000000000001 /* RootTabView.swift in Sources */,
 				4BLOTVM010000000000000001 /* LotteryViewModel.swift in Sources */,
 				4BLOTVW010000000000000001 /* LotteryView.swift in Sources */,
+				4BAMDVM010000000000000001 /* AmidaViewModel.swift in Sources */,
+				4BAMDVW010000000000000001 /* AmidaView.swift in Sources */,
 				4B8DF0472AF8A19B00BFF8AB /* Roulette.swift in Sources */,
 				4BC70A902AFA82DB001F2E31 /* AppOpenAd.swift in Sources */,
 				4B865D572ADC53B700B23C12 /* InterstitialAd.swift in Sources */,
@@ -393,6 +403,8 @@
 				4BROOTV010000000000000002 /* RootTabView.swift in Sources */,
 				4BLOTVM010000000000000002 /* LotteryViewModel.swift in Sources */,
 				4BLOTVW010000000000000002 /* LotteryView.swift in Sources */,
+				4BAMDVM010000000000000002 /* AmidaViewModel.swift in Sources */,
+				4BAMDVW010000000000000002 /* AmidaView.swift in Sources */,
 				4B8DF0482AF8A19B00BFF8AB /* Roulette.swift in Sources */,
 				4BC70A912AFA82DB001F2E31 /* AppOpenAd.swift in Sources */,
 				4B865D582ADC53B700B23C12 /* InterstitialAd.swift in Sources */,

@@ -30,3 +30,9 @@
 "EditItems" = "項目を編集";
 
 "SpinDuration" = "回転時間(秒)";
+
+"Amida" = "あみだくじ";
+"AmidaParticipant" = "参加者";
+"AmidaResult" = "結果";
+"AmidaResultPlaceholder" = "結果を入力";
+"AmidaClear" = "クリア";

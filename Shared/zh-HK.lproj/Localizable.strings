@@ -30,3 +30,9 @@
 "EditItems" = "編輯項目";
 
 "SpinDuration" = "旋轉時間(秒)";
+
+"Amida" = "鬼腳圖";
+"AmidaParticipant" = "參加者";
+"AmidaResult" = "結果";
+"AmidaResultPlaceholder" = "輸入結果";
+"AmidaClear" = "清除";

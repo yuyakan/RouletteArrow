@@ -30,3 +30,9 @@
 "EditItems" = "Edit items";
 
 "SpinDuration" = "Spin time (sec)";
+
+"Amida" = "Amida";
+"AmidaParticipant" = "Player";
+"AmidaResult" = "Result";
+"AmidaResultPlaceholder" = "Enter result";
+"AmidaClear" = "Clear";

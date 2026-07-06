@@ -33,6 +33,12 @@ struct RootTabView: View {
                     Image(systemName: "circle.hexagongrid.fill")
                     Text(LocalizedStringKey("Lottery"))
                 }
+
+            AmidaView()
+                .tabItem {
+                    Image(systemName: "line.3.horizontal")
+                    Text(LocalizedStringKey("Amida"))
+                }
         }
         .tint(BrandTheme.mint)
     }

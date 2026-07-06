@@ -30,3 +30,9 @@
 "EditItems" = "编辑项目";
 
 "SpinDuration" = "旋转时间(秒)";
+
+"Amida" = "画鬼脚";
+"AmidaParticipant" = "参加者";
+"AmidaResult" = "结果";
+"AmidaResultPlaceholder" = "输入结果";
+"AmidaClear" = "清除";
