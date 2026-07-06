@@ -138,25 +138,54 @@ struct AmidaView: View {
                     )
                     .transition(.opacity)
                 } else {
-                    // 縦線の上部・株（根元）だけを見せる
+                    // あみだくじ本体は描いたまま、中央をすりガラスで覆って中身をぼかす。
+                    // 下のあみだがうっすら透けて「隠れた中身がある」ことを上品に伝える。
                     LadderView(
                         laneCount: viewModel.laneCount,
                         rungs: viewModel.rungs,
                         tracedPaths: [:],
                         progress: 0,
                         color: { Self.color(for: $0) },
-                        stubOnly: true
+                        lineColor: BrandTheme.mint.opacity(0.30)
                     )
-                    // タップ導線のヒントを中央に重ねる
-                    Text(LocalizedStringKey("AmidaTapStart"))
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(BrandTheme.textPrimary.opacity(0.35))
+                    .padding(.vertical, 26)
+                    hiddenCover
                 }
             }
 
             // 下段：結果。たどり着いた lane を強調する。
             laneLabels(labels: viewModel.results, isTop: false)
         }
+    }
+
+    /// スタート前に中央のあみだくじを覆うすりガラス。
+    /// 下のあみだくじがうっすら透けて「隠れた中身がある」ことを上品に伝える。
+    private var hiddenCover: some View {
+        let shape = RoundedRectangle(cornerRadius: 20, style: .continuous)
+        return shape
+            .fill(.ultraThinMaterial)
+            // ガラスをやや薄くして下のあみだくじの模様を透けさせる（答えは読めない程度に）
+            .opacity(0.9)
+            .overlay(
+                // 細い縁でカードの存在を締める
+                shape.stroke(Color.white.opacity(0.6), lineWidth: 1)
+            )
+            .overlay(
+                // 中央の鍵アイコン（すりガラス上の白い円チップに乗せる）
+                Image(systemName: "lock.fill")
+                    .font(.system(size: 22, weight: .semibold))
+                    .foregroundColor(BrandTheme.mint)
+                    .frame(width: 56, height: 56)
+                    .background(
+                        Circle()
+                            .fill(.regularMaterial)
+                            .overlay(Circle().stroke(Color.white.opacity(0.7), lineWidth: 1))
+                            .shadow(color: Color.black.opacity(0.08), radius: 6, y: 2)
+                    )
+            )
+            .shadow(color: Color.black.opacity(0.06), radius: 12, y: 4)
+            // 上下の株（縦線の見えている区間）を残すため内側に余白を取る
+            .padding(.vertical, 26)
     }
 
     /// 上段/下段のラベル行。上段はタップ可能なボタンにする。
@@ -340,6 +369,8 @@ private struct LadderView: View {
     let color: (Int) -> Color
     /// true のときは縦線の上端・下端の短い区間だけを描く（スタート前のちら見せ）。
     var stubOnly: Bool = false
+    /// 縦線・横棒の色（すりガラス越しに見せたいときは濃いめの色を渡す）。
+    var lineColor: Color = Color.black.opacity(0.18)
 
     /// ちら見せ時に見せる縦線の長さ（上端・下端それぞれ）。
     private let stubLength: CGFloat = 24
@@ -372,7 +403,7 @@ private struct LadderView: View {
                             p.addLine(to: CGPoint(x: x, y: bottom))
                         }
                     }
-                    .stroke(Color.black.opacity(0.18), lineWidth: 3)
+                    .stroke(lineColor, lineWidth: 3)
                 }
 
                 // 横棒（ちら見せ時は描かない）
@@ -384,7 +415,7 @@ private struct LadderView: View {
                                 p.move(to: CGPoint(x: xForLane(lane), y: y))
                                 p.addLine(to: CGPoint(x: xForLane(lane + 1), y: y))
                             }
-                            .stroke(Color.black.opacity(0.18), lineWidth: 3)
+                            .stroke(lineColor, lineWidth: 3)
                         }
                     }
                 }
