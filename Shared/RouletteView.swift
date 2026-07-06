@@ -41,7 +41,6 @@ struct RouletteView: View {
             }
             .animation(.easeInOut(duration: 0.25), value: rouletteViewModel.isVisibleSettingValue)
         }
-        .onAppear { rouletteViewModel.reloadSpinDuration() }
     }
 
     // MARK: - Header
@@ -188,10 +187,6 @@ struct RouletteView: View {
 
             // モード選択（通常 / 複数当選 / 順番決め）
             VStack(alignment: .leading, spacing: 12) {
-                Text(LocalizedStringKey("Mode"))
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(BrandTheme.textPrimary)
-
                 Picker("Mode", selection: $rouletteViewModel.mode) {
                     ForEach(ArrowMode.allCases) { m in
                         Text(LocalizedStringKey(m.titleKey)).tag(m)
@@ -219,22 +214,6 @@ struct RouletteView: View {
                     .frame(width: 120, height: 90)
                     .clipped()
                 }
-            }
-
-            Divider().overlay(Color.black.opacity(0.08))
-
-            // 回転秒数（全タブ共通）
-            VStack(alignment: .leading, spacing: 12) {
-                Text(LocalizedStringKey("SpinDuration"))
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(BrandTheme.textPrimary)
-
-                Picker("Spin duration", selection: $rouletteViewModel.spinDuration) {
-                    ForEach(SpinSettings.options, id: \.self) { s in
-                        Text("\(s)").tag(s)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
             }
         }
         .padding(20)

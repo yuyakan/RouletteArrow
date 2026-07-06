@@ -24,6 +24,7 @@
 "LotteryModeMultiple" = "多人中选";
 "LotteryModeRanking" = "排序";
 "Items" = "项目";
+"Ratio" = "比例";
 "ItemPlaceholder" = "输入名称";
 "AddItem" = "添加项目";
 "EditItems" = "编辑项目";

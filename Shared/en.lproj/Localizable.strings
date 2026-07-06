@@ -24,6 +24,7 @@
 "LotteryModeMultiple" = "Winners";
 "LotteryModeRanking" = "Ranking";
 "Items" = "Items";
+"Ratio" = "Ratio";
 "ItemPlaceholder" = "Enter a name";
 "AddItem" = "Add item";
 "EditItems" = "Edit items";

@@ -27,9 +27,23 @@ enum LotteryMode: Int, CaseIterable, Identifiable {
 
 class LotteryViewModel: ObservableObject {
     private static let itemsKey = "lottery_items"
+    private static let weightsKey = "lottery_weights"
+
+    /// 割合の重みの範囲（各項目に設定できる整数）
+    static let weightRange = 1...20
 
     /// 抽選項目（ラベル）。「はずれ」を混ぜることで外れ枠を表現する。
     @Published var items: [String] {
+        didSet {
+            // items の増減に weights を追従させる（末尾は重み1で追加）
+            syncWeightsCount()
+            persist()
+        }
+    }
+
+    /// 各項目の割合の重み。items と同じ index で対応する。
+    /// 実際の割合は「各重み ÷ 有効項目の重み合計」で決まる。
+    @Published var weights: [Int] {
         didSet { persist() }
     }
     /// 円グラフの回転角度
@@ -40,47 +54,79 @@ class LotteryViewModel: ObservableObject {
     @Published var winnerCount: Int = 2
     /// 回転中はStartを無効化する
     @Published var isSpinning: Bool = false
-    /// 回転秒数（全タブ共通。変更時は SpinSettings に永続化する）
-    @Published var spinDuration: Int = SpinSettings.duration {
-        didSet { SpinSettings.duration = spinDuration }
-    }
-
-    /// 他タブで秒数が変更されている場合に備えて、共通設定から読み直す。
-    func reloadSpinDuration() {
-        let current = SpinSettings.duration
-        if current != spinDuration {
-            spinDuration = current
-        }
-    }
+    /// 回転秒数（全タブ共通・12秒固定）
+    let spinDuration = SpinSettings.duration
 
     init() {
+        let savedItems: [String]
         if let saved = UserDefaults.standard.stringArray(forKey: Self.itemsKey), !saved.isEmpty {
-            self.items = saved
+            savedItems = saved
         } else {
             // 初期サンプル
-            self.items = ["A", "B", "C", "D"]
+            savedItems = ["A", "B", "C", "D"]
+        }
+        self.items = savedItems
+
+        // 保存済みの重みを読み込む。旧データや欠損分は重み1で補う（=従来の均等割）。
+        let savedWeights = UserDefaults.standard.array(forKey: Self.weightsKey) as? [Int] ?? []
+        self.weights = savedItems.indices.map { i in
+            let w = i < savedWeights.count ? savedWeights[i] : 1
+            return Self.clampWeight(w)
         }
     }
 
     private func persist() {
         UserDefaults.standard.set(items, forKey: Self.itemsKey)
+        UserDefaults.standard.set(weights, forKey: Self.weightsKey)
+    }
+
+    /// items の要素数に weights を合わせる（不足分は重み1、余剰分は切り捨て）。
+    private func syncWeightsCount() {
+        if weights.count < items.count {
+            weights.append(contentsOf: Array(repeating: 1, count: items.count - weights.count))
+        } else if weights.count > items.count {
+            weights.removeLast(weights.count - items.count)
+        }
+    }
+
+    private static func clampWeight(_ w: Int) -> Int {
+        min(max(w, weightRange.lowerBound), weightRange.upperBound)
     }
 
     // MARK: - 項目編集
 
     func addItem() {
         items.append("")
+        // items の didSet で weights も追従する
     }
 
     func removeItem(at offsets: IndexSet) {
         for index in offsets.sorted(by: >) where items.indices.contains(index) {
             items.remove(at: index)
+            if weights.indices.contains(index) {
+                weights.remove(at: index)
+            }
         }
+    }
+
+    /// 指定 index の重みを設定する（範囲内にクランプ）。
+    func setWeight(_ w: Int, at index: Int) {
+        guard weights.indices.contains(index) else { return }
+        weights[index] = Self.clampWeight(w)
     }
 
     /// 空でない項目のみ（抽選対象）
     var validItems: [String] {
-        items.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+        items.enumerated()
+            .filter { !$1.trimmingCharacters(in: .whitespaces).isEmpty }
+            .map { $0.element }
+    }
+
+    /// validItems と同じ並びの重み。円グラフの扇形サイズや割合表示に使う。
+    var validWeights: [Int] {
+        items.indices
+            .filter { !items[$0].trimmingCharacters(in: .whitespaces).isEmpty }
+            .map { weights.indices.contains($0) ? weights[$0] : 1 }
     }
 
     /// 複数当選で選べる最大数

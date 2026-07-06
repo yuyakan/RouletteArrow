@@ -12,6 +12,13 @@ struct LotteryView: View {
     @StateObject private var viewModel = LotteryViewModel()
     @State private var isEditingItems = false
 
+    /// 項目の TextField(RoundedBorder) とそろえる割合コントロールの高さ
+    private static let rowHeight: CGFloat = 34
+    /// 割合コントロール全体の幅（「割合」キャプションもこの幅に合わせる）
+    private static let weightControlWidth: CGFloat = 116
+    /// 各行の削除ボタンの幅
+    private static let deleteButtonWidth: CGFloat = 28
+
     var body: some View {
         ZStack {
             BrandTheme.background
@@ -39,7 +46,6 @@ struct LotteryView: View {
             }
             .animation(.easeInOut(duration: 0.25), value: isEditingItems)
         }
-        .onAppear { viewModel.reloadSpinDuration() }
     }
 
     // MARK: - Header
@@ -48,7 +54,11 @@ struct LotteryView: View {
         HStack {
             Spacer()
             Button(
-                action: { isEditingItems.toggle() },
+                action: {
+                    // 閉じるときは入力途中の下書きを破棄してモデル値に揃える
+                    if isEditingItems { weightDrafts = [:] }
+                    isEditingItems.toggle()
+                },
                 label: {
                     Image(systemName: "list.bullet")
                         .font(.system(size: 22, weight: .semibold))
@@ -76,7 +86,7 @@ struct LotteryView: View {
 
     private var wheelStage: some View {
         ZStack {
-            WheelView(items: viewModel.validItems)
+            WheelView(items: viewModel.validItems, weights: viewModel.validWeights)
                 .rotationEffect(Angle(degrees: Double(viewModel.rotationDegree)))
                 .animation(.easeOut(duration: Double(viewModel.spinDuration)), value: viewModel.rotationDegree)
                 .padding(.horizontal, 24)
@@ -157,19 +167,32 @@ struct LotteryView: View {
         VStack(spacing: 16) {
             // 項目リスト（可変長。多いときはパネル内をスクロール）
             VStack(alignment: .leading, spacing: 10) {
-                Text(LocalizedStringKey("Items"))
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(BrandTheme.textPrimary)
+                HStack(spacing: 8) {
+                    Spacer(minLength: 0)
+                    // 割合入力欄の真上に来るよう、重みコントロールと同じ幅で中央寄せする
+                    Text(LocalizedStringKey("Ratio"))
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundColor(BrandTheme.textPrimary.opacity(0.5))
+                        .frame(width: Self.weightControlWidth)
+                    // 各行の削除ボタンぶんの余白（キャプションを削除ボタンの上に載せない）
+                    Color.clear.frame(width: Self.deleteButtonWidth, height: 1)
+                }
+                .fixedSize(horizontal: false, vertical: true)
 
                 ScrollView {
                     VStack(spacing: 8) {
                         ForEach(Array(viewModel.items.indices), id: \.self) { i in
-                            HStack {
+                            HStack(spacing: 8) {
                                 TextField(LocalizedStringKey("ItemPlaceholder"), text: $viewModel.items[i])
                                     .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                                // 割合の重み。値が大きいほど扇形（当たりやすさ）が大きくなる。
+                                weightControl(index: i)
+
                                 Button(action: { viewModel.removeItem(at: IndexSet(integer: i)) }) {
                                     Image(systemName: "minus.circle.fill")
                                         .foregroundColor(Color.red.opacity(0.7))
+                                        .frame(width: Self.deleteButtonWidth)
                                 }
                             }
                         }
@@ -189,9 +212,6 @@ struct LotteryView: View {
 
             // モード選択
             VStack(alignment: .leading, spacing: 12) {
-                Text(LocalizedStringKey("Mode"))
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(BrandTheme.textPrimary)
 
                 Picker("Mode", selection: $viewModel.mode) {
                     ForEach(LotteryMode.allCases) { m in
@@ -210,22 +230,6 @@ struct LotteryView: View {
                     }
                 }
             }
-
-            Divider().overlay(Color.black.opacity(0.08))
-
-            // 回転秒数（全タブ共通）
-            VStack(alignment: .leading, spacing: 12) {
-                Text(LocalizedStringKey("SpinDuration"))
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(BrandTheme.textPrimary)
-
-                Picker("Spin duration", selection: $viewModel.spinDuration) {
-                    ForEach(SpinSettings.options, id: \.self) { s in
-                        Text("\(s)").tag(s)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-            }
         }
         .padding(20)
         .background(
@@ -235,6 +239,86 @@ struct LotteryView: View {
         .padding(.horizontal, 16)
         .padding(.bottom, 8)
     }
+
+    /// 数値フィールドの入力途中テキスト。空欄や打ちかけの値をそのまま保持するため、
+    /// モデルの重みとは別に index ごとの生テキストを覚えておく。
+    @State private var weightDrafts: [Int: String] = [:]
+
+    /// 重みフィールド用のバインディング。
+    /// 表示は下書き（あれば）→なければモデルの重み。書き込み時は数字だけ拾って範囲内にクランプする。
+    private func weightTextBinding(index i: Int) -> Binding<String> {
+        Binding(
+            get: {
+                if let draft = weightDrafts[i] { return draft }
+                let weight = viewModel.weights.indices.contains(i) ? viewModel.weights[i] : 1
+                return "\(weight)"
+            },
+            set: { newValue in
+                // 数字以外を除去
+                let digits = newValue.filter { $0.isNumber }
+                if let value = Int(digits) {
+                    viewModel.setWeight(value, at: i)
+                    // クランプ後の値が入力と違う場合（範囲外）は下書きを消して確定値を表示
+                    let applied = viewModel.weights.indices.contains(i) ? viewModel.weights[i] : value
+                    weightDrafts[i] = (applied == value) ? digits : nil
+                } else {
+                    // 空欄など：入力途中として下書きだけ保持（モデルは据え置き）
+                    weightDrafts[i] = digits.isEmpty ? "" : digits
+                }
+            }
+        )
+    }
+
+    /// 1項目ぶんの割合の重みを増減するコンパクトなコントロール。
+    /// 「−  値  ＋」を横並びにして TextField の隣に収める。
+    private func weightControl(index i: Int) -> some View {
+        let weight = viewModel.weights.indices.contains(i) ? viewModel.weights[i] : 1
+        return HStack(spacing: 6) {
+            Button(action: {
+                viewModel.setWeight(weight - 1, at: i)
+                weightDrafts[i] = nil   // 下書きを破棄してモデル値を表示
+            }) {
+                Image(systemName: "minus")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(BrandTheme.textPrimary)
+                    .frame(width: 22, height: 22)
+            }
+            .disabled(weight <= LotteryViewModel.weightRange.lowerBound)
+
+            // 直接入力できる数値フィールド。空欄や範囲外は setWeight でクランプする。
+            TextField("", text: weightTextBinding(index: i))
+                #if os(iOS)
+                .keyboardType(.numberPad)
+                #endif
+                .multilineTextAlignment(.center)
+                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                .foregroundColor(BrandTheme.textPrimary)
+                .frame(maxWidth: .infinity)
+
+            Button(action: {
+                viewModel.setWeight(weight + 1, at: i)
+                weightDrafts[i] = nil   // 下書きを破棄してモデル値を表示
+            }) {
+                Image(systemName: "plus")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundColor(BrandTheme.mint)
+                    .frame(width: 22, height: 22)
+            }
+            .disabled(weight >= LotteryViewModel.weightRange.upperBound)
+        }
+        .buttonStyle(BorderlessButtonStyle())
+        .padding(.horizontal, 6)
+        // 項目の入力欄と高さ・幅をそろえる
+        .frame(width: Self.weightControlWidth, height: Self.rowHeight)
+        .background(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .stroke(Color.black.opacity(0.12), lineWidth: 1)
+                )
+        )
+    }
 }
 
 // MARK: - Wheel drawing
@@ -242,6 +326,8 @@ struct LotteryView: View {
 /// 項目数に応じて色分けした扇形を描き、各扇にラベル文字を配置する円グラフ。
 private struct WheelView: View {
     let items: [String]
+    /// items と同じ並びの割合の重み。扇形の大きさを重みに比例させる。
+    let weights: [Int]
 
     /// ブランドカラーを基調にしたセグメント色パレット
     private static let palette: [Color] = [
@@ -253,24 +339,43 @@ private struct WheelView: View {
         Color(red: 0x5E / 255, green: 0xC5 / 255, blue: 0x8B / 255)
     ]
 
+    /// 各扇形の開始角度(度)。weights の比率で 0..360 を割り当てる。
+    /// boundaries[i]..boundaries[i+1] が index i の扇形。
+    private var boundaries: [Double] {
+        let count = max(items.count, 1)
+        // items が空でも 1 分割ぶんの境界を返す
+        guard !weights.isEmpty else {
+            let step = 360.0 / Double(count)
+            return (0...count).map { step * Double($0) }
+        }
+        let total = Double(max(weights.reduce(0, +), 1))
+        var result: [Double] = [0]
+        var acc = 0.0
+        for w in weights {
+            acc += Double(w) / total * 360.0
+            result.append(acc)
+        }
+        return result
+    }
+
     var body: some View {
         GeometryReader { geo in
             let count = max(items.count, 1)
             let size = min(geo.size.width, geo.size.height)
             let radius = size / 2
             let center = CGPoint(x: geo.size.width / 2, y: geo.size.height / 2)
-            let step = 360.0 / Double(count)
+            let bounds = boundaries
 
             ZStack {
-                // 扇形本体
+                // 扇形本体（重みに比例した角度）
                 ForEach(0..<count, id: \.self) { i in
-                    Wedge(startDegree: step * Double(i), endDegree: step * Double(i + 1))
+                    Wedge(startDegree: bounds[i], endDegree: bounds[i + 1])
                         .fill(Self.palette[i % Self.palette.count])
                 }
 
-                // ラベル
+                // ラベル（各扇形の中央角に配置）
                 ForEach(0..<items.count, id: \.self) { i in
-                    let mid = step * (Double(i) + 0.5)
+                    let mid = (bounds[i] + bounds[i + 1]) / 2
                     let rad = mid * .pi / 180
                     let labelRadius = radius * 0.62
                     Text(items[i])

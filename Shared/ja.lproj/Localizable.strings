@@ -24,6 +24,7 @@
 "LotteryModeMultiple" = "複数当選";
 "LotteryModeRanking" = "順番決め";
 "Items" = "項目";
+"Ratio" = "割合";
 "ItemPlaceholder" = "名前を入力";
 "AddItem" = "項目を追加";
 "EditItems" = "項目を編集";
