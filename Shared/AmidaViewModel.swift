@@ -28,12 +28,12 @@ class AmidaViewModel: ObservableObject {
     /// あみだくじの見た目・判定はこの配列から決まる。
     @Published private(set) var rungs: [[Int]] = []
 
-    /// 直近でたどった経路（各 row 通過後の lane 位置。ハイライト表示に使う）。
-    /// nil のときは経路を表示しない。
-    @Published var tracedLanes: [Int]? = nil
-    /// たどり始めた上段の lane（結果表示のため保持）
-    @Published var tracedStartLane: Int? = nil
-    /// アニメーション中フラグ
+    /// 表示中の経路。上段 lane をキーに、その経路（各 row 通過後の lane 位置）を持つ。
+    /// 複数の選択肢を同時に色分け表示できる。
+    @Published var tracedPaths: [Int: [Int]] = [:]
+    /// 経路を描くアニメーションの進捗（0→1）。線が引かれていく表現に使う。
+    @Published var drawProgress: CGFloat = 0
+    /// アニメーション中フラグ（描画中は操作を抑制する）
     @Published var isTracing: Bool = false
 
     /// 横棒を並べる段数。多いほど入り組んだあみだくじになる。
@@ -110,10 +110,13 @@ class AmidaViewModel: ObservableObject {
         rungs = newRungs
     }
 
+    /// 線を引くアニメーションの秒数。
+    static let drawDuration: Double = 0.9
+
     /// 経路表示をクリアする。
     func clearTrace() {
-        tracedLanes = nil
-        tracedStartLane = nil
+        tracedPaths = [:]
+        drawProgress = 0
         isTracing = false
     }
 
@@ -148,15 +151,37 @@ class AmidaViewModel: ObservableObject {
         return results.indices.contains(lane) ? results[lane] : ""
     }
 
-    /// 指定した上段 lane からの経路をたどってハイライト表示する。
-    func trace(from startLane: Int) {
-        guard !isTracing, participants.indices.contains(startLane) else { return }
-        tracedStartLane = startLane
-        tracedLanes = tracePath(from: startLane)
-        isTracing = true
-        // 表示アニメーションのために一定時間後にフラグを解除する
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) { [weak self] in
-            self?.isTracing = false
+    /// 指定した上段 lane の経路を表示対象に加える。実際の線引きアニメーションは View 側で drawProgress を進めて行う。
+    /// - Returns: 新たに追加された（＝アニメーションが必要な）場合 true。
+    @discardableResult
+    func trace(from startLane: Int) -> Bool {
+        guard !isTracing, participants.indices.contains(startLane) else { return false }
+        // すでに表示済みなら何もしない
+        if tracedPaths[startLane] != nil { return false }
+        tracedPaths[startLane] = tracePath(from: startLane)
+        return true
+    }
+
+    /// 全参加者の経路を一度に表示対象にする。
+    /// - Returns: 新たに追加された経路があれば true。
+    @discardableResult
+    func traceAll() -> Bool {
+        guard !isTracing else { return false }
+        var added = false
+        for lane in participants.indices where tracedPaths[lane] == nil {
+            tracedPaths[lane] = tracePath(from: lane)
+            added = true
         }
+        return added
+    }
+
+    /// 描画アニメーションの開始/終了を管理する。View から呼ぶ。
+    func beginDrawing() {
+        isTracing = true
+        drawProgress = 0
+    }
+
+    func endDrawing() {
+        isTracing = false
     }
 }
