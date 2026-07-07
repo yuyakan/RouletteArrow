@@ -145,12 +145,17 @@ class LotteryViewModel: ObservableObject {
         let targets = validItems
         guard targets.count >= 2, !isSpinning else { return }
 
+        // 広告表示回は回転させない（広告のみ表示）
+        guard AdManager.shared.notifySpin() else { return }
+
         isSpinning = true
-        AdManager.shared.notifySpin()
 
         // 回転量を決める（矢印モードと同様に十分な回転＋乱数）
         let decisionAngle = Int.random(in: 1...3600)
         rotationDegree += 3600 + decisionAngle
+
+        // 実行された1回として累計する（レビュー依頼は設定を閉じたときに判定・表示）
+        ReviewManager.shared.notifyExecutedSpin()
 
         // アニメーション完了後に回転状態を解除する。
         // 当選はポインタが指すセグメントで示すため、結果の保持は不要。

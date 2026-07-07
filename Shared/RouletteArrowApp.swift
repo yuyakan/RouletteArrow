@@ -35,13 +35,9 @@ struct RouletteArrowApp: App {
             }
         }
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject var appOpen = AppOpen()
     var body: some Scene {
         WindowGroup {
             RootTabView()
-        }
-        .onChange(of: appOpen.appOpenAdLoaded) { newValue in
-            appOpen.presentAppOpenAd()
         }
     }
 }

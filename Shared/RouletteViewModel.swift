@@ -94,11 +94,15 @@ class RouletteViewModel: ObservableObject {
     }
 
     func start() {
+        // 広告表示回はスタート処理を行わない（広告のみ表示）
+        guard AdManager.shared.notifySpin() else { return }
+
         isVisibleStartButton.toggle()
         // 回すたびに順位の並びをシャッフルして各矢印へ割り当てる
         shuffleRanksIfNeeded()
         rouletteRotate()
-        AdManager.shared.notifySpin()
+        // 実行された1回として累計する（レビュー依頼は設定を閉じたときに判定・表示）
+        ReviewManager.shared.notifyExecutedSpin()
         DispatchQueue.main.asyncAfter(deadline: .now() + Double(spinDuration)) {
             self.isVisibleStartButton.toggle()
         }
@@ -109,6 +113,10 @@ class RouletteViewModel: ObservableObject {
     }
 
     func setting() {
+        // 設定を閉じるとき：レビュー依頼（優先）または広告を表示
+        if isVisibleSettingValue {
+            AdManager.shared.notifySettingsClosed()
+        }
         isVisibleSettingValue.toggle()
     }
 }
