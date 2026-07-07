@@ -1,0 +1,44 @@
+/*
+  Localizable.strings
+  RouletteArrow
+
+  Created by 上別縄祐也 on 2023/11/06.
+
+*/
+"Start" = "Iniciar";
+"Separation" = "Divisões";
+"Peoples" = "Pessoas";
+"Theme" = "Tema";
+"Setting" = "Ajustes";
+"OK" = "OK";
+
+"Arrow" = "Seta";
+"Lottery" = "Roleta";
+"Mode" = "Modo";
+"ArrowModeSingle" = "Normal";
+"ArrowModeMultiple" = "Vencedores";
+"ArrowModeRanking" = "Classificação";
+"WinnerCount" = "Vencedores";
+"RankCount" = "Posições";
+"LotteryModeSingle" = "Normal";
+"LotteryModeMultiple" = "Vencedores";
+"LotteryModeRanking" = "Classificação";
+"Items" = "Itens";
+"Ratio" = "Proporção";
+"ItemPlaceholder" = "Digite um nome";
+"AddItem" = "Adicionar item";
+"EditItems" = "Editar itens";
+
+"SpinDuration" = "Tempo de giro (s)";
+
+"Amida" = "Amida";
+"AmidaParticipant" = "Jogador";
+"AmidaResult" = "Resultado";
+"AmidaResultPlaceholder" = "Digite o resultado";
+"AmidaClear" = "Limpar";
+"AmidaAll" = "Todos";
+"AmidaTapStart" = "Toque em Iniciar";
+"AmidaComplexity" = "Complexidade";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";

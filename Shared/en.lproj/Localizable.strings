@@ -11,3 +11,34 @@
 "Theme" = "Theme";
 "Setting" = "Setting";
 "OK" = "OK";
+
+"Arrow" = "Arrow";
+"Lottery" = "Roulette";
+"Mode" = "Mode";
+"ArrowModeSingle" = "Normal";
+"ArrowModeMultiple" = "Winners";
+"ArrowModeRanking" = "Ranking";
+"WinnerCount" = "Winners";
+"RankCount" = "Ranks";
+"LotteryModeSingle" = "Normal";
+"LotteryModeMultiple" = "Winners";
+"LotteryModeRanking" = "Ranking";
+"Items" = "Items";
+"Ratio" = "Ratio";
+"ItemPlaceholder" = "Enter a name";
+"AddItem" = "Add item";
+"EditItems" = "Edit items";
+
+"SpinDuration" = "Spin time (sec)";
+
+"Amida" = "Amida";
+"AmidaParticipant" = "Player";
+"AmidaResult" = "Result";
+"AmidaResultPlaceholder" = "Enter result";
+"AmidaClear" = "Clear";
+"AmidaAll" = "All";
+"AmidaTapStart" = "Tap Start";
+"AmidaComplexity" = "Complexity";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";

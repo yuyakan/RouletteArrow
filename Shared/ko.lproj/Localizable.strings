@@ -1,0 +1,44 @@
+/*
+  Localizable.strings
+  RouletteArrow
+
+  Created by 上別縄祐也 on 2023/11/06.
+
+*/
+"Start" = "시작";
+"Separation" = "분할";
+"Peoples" = "인원수";
+"Theme" = "테마";
+"Setting" = "설정";
+"OK" = "확인";
+
+"Arrow" = "화살표";
+"Lottery" = "룰렛";
+"Mode" = "모드";
+"ArrowModeSingle" = "일반";
+"ArrowModeMultiple" = "당첨자";
+"ArrowModeRanking" = "순위";
+"WinnerCount" = "당첨 인원";
+"RankCount" = "인원수";
+"LotteryModeSingle" = "일반";
+"LotteryModeMultiple" = "당첨자";
+"LotteryModeRanking" = "순위";
+"Items" = "항목";
+"Ratio" = "비율";
+"ItemPlaceholder" = "이름 입력";
+"AddItem" = "항목 추가";
+"EditItems" = "항목 편집";
+
+"SpinDuration" = "회전 시간(초)";
+
+"Amida" = "사다리타기";
+"AmidaParticipant" = "참가자";
+"AmidaResult" = "결과";
+"AmidaResultPlaceholder" = "결과 입력";
+"AmidaClear" = "지우기";
+"AmidaAll" = "전체";
+"AmidaTapStart" = "시작을 누르세요";
+"AmidaComplexity" = "복잡도";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";
