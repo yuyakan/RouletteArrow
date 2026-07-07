@@ -1,0 +1,44 @@
+/*
+  Localizable.strings
+  RouletteArrow
+
+  Created by 上別縄祐也 on 2023/11/06.
+
+*/
+"Start" = "Mulai";
+"Separation" = "Pembagian";
+"Peoples" = "Jumlah orang";
+"Theme" = "Tema";
+"Setting" = "Pengaturan";
+"OK" = "OK";
+
+"Arrow" = "Panah";
+"Lottery" = "Roulette";
+"Mode" = "Mode";
+"ArrowModeSingle" = "Normal";
+"ArrowModeMultiple" = "Pemenang";
+"ArrowModeRanking" = "Peringkat";
+"WinnerCount" = "Pemenang";
+"RankCount" = "Peringkat";
+"LotteryModeSingle" = "Normal";
+"LotteryModeMultiple" = "Pemenang";
+"LotteryModeRanking" = "Peringkat";
+"Items" = "Item";
+"Ratio" = "Rasio";
+"ItemPlaceholder" = "Masukkan nama";
+"AddItem" = "Tambah item";
+"EditItems" = "Edit item";
+
+"SpinDuration" = "Waktu putar (dtk)";
+
+"Amida" = "Amida";
+"AmidaParticipant" = "Pemain";
+"AmidaResult" = "Hasil";
+"AmidaResultPlaceholder" = "Masukkan hasil";
+"AmidaClear" = "Hapus";
+"AmidaAll" = "Semua";
+"AmidaTapStart" = "Ketuk Mulai";
+"AmidaComplexity" = "Kerumitan";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";

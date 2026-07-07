@@ -1,0 +1,44 @@
+/*
+  Localizable.strings
+  RouletteArrow
+
+  Created by 上別縄祐也 on 2023/11/06.
+
+*/
+"Start" = "Bắt đầu";
+"Separation" = "Số phần";
+"Peoples" = "Số người";
+"Theme" = "Chủ đề";
+"Setting" = "Cài đặt";
+"OK" = "OK";
+
+"Arrow" = "Mũi tên";
+"Lottery" = "Vòng quay";
+"Mode" = "Chế độ";
+"ArrowModeSingle" = "Thường";
+"ArrowModeMultiple" = "Người thắng";
+"ArrowModeRanking" = "Xếp hạng";
+"WinnerCount" = "Người thắng";
+"RankCount" = "Thứ hạng";
+"LotteryModeSingle" = "Thường";
+"LotteryModeMultiple" = "Người thắng";
+"LotteryModeRanking" = "Xếp hạng";
+"Items" = "Mục";
+"Ratio" = "Tỷ lệ";
+"ItemPlaceholder" = "Nhập tên";
+"AddItem" = "Thêm mục";
+"EditItems" = "Sửa mục";
+
+"SpinDuration" = "Thời gian quay (giây)";
+
+"Amida" = "Amida";
+"AmidaParticipant" = "Người chơi";
+"AmidaResult" = "Kết quả";
+"AmidaResultPlaceholder" = "Nhập kết quả";
+"AmidaClear" = "Xóa";
+"AmidaAll" = "Tất cả";
+"AmidaTapStart" = "Chạm Bắt đầu";
+"AmidaComplexity" = "Độ phức tạp";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";

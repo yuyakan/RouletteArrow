@@ -1,0 +1,44 @@
+/*
+  Localizable.strings
+  RouletteArrow
+
+  Created by 上別縄祐也 on 2023/11/06.
+
+*/
+"Start" = "เริ่ม";
+"Separation" = "จำนวนช่อง";
+"Peoples" = "จำนวนคน";
+"Theme" = "ธีม";
+"Setting" = "ตั้งค่า";
+"OK" = "ตกลง";
+
+"Arrow" = "ลูกศร";
+"Lottery" = "วงล้อ";
+"Mode" = "โหมด";
+"ArrowModeSingle" = "ปกติ";
+"ArrowModeMultiple" = "ผู้ชนะ";
+"ArrowModeRanking" = "อันดับ";
+"WinnerCount" = "จำนวนผู้ชนะ";
+"RankCount" = "จำนวนอันดับ";
+"LotteryModeSingle" = "ปกติ";
+"LotteryModeMultiple" = "ผู้ชนะ";
+"LotteryModeRanking" = "อันดับ";
+"Items" = "รายการ";
+"Ratio" = "สัดส่วน";
+"ItemPlaceholder" = "ป้อนชื่อ";
+"AddItem" = "เพิ่มรายการ";
+"EditItems" = "แก้ไขรายการ";
+
+"SpinDuration" = "เวลาหมุน (วินาที)";
+
+"Amida" = "อามิดะ";
+"AmidaParticipant" = "ผู้เล่น";
+"AmidaResult" = "ผลลัพธ์";
+"AmidaResultPlaceholder" = "ป้อนผลลัพธ์";
+"AmidaClear" = "ล้าง";
+"AmidaAll" = "ทั้งหมด";
+"AmidaTapStart" = "แตะเริ่ม";
+"AmidaComplexity" = "ความซับซ้อน";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";
