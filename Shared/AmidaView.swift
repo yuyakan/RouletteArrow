@@ -33,7 +33,12 @@ struct AmidaView: View {
 
     /// 経路を表示対象に加えて、線を引くアニメーションを走らせる。
     private func startTrace(_ addPaths: () -> Bool) {
-        guard addPaths(), !viewModel.isTracing else { return }
+        guard !viewModel.isTracing else { return }
+        // 広告表示回はスタート処理（経路追加・描画）を行わない（広告のみ表示）
+        guard AdManager.shared.notifySpin() else { return }
+        guard addPaths() else { return }
+        // 実行された1回として累計する（レビュー依頼は設定を閉じたときに判定・表示）
+        ReviewManager.shared.notifyExecutedSpin()
         // スタート時にあみだくじ（縦線・横棒）を表示する。
         if !hasStarted {
             withAnimation(.easeInOut(duration: 0.2)) { hasStarted = true }
@@ -44,7 +49,7 @@ struct AmidaView: View {
         withTransaction(reset) { viewModel.beginDrawing() }
         // 次の描画サイクルで 0→1 へアニメーションさせ、線を引いていく。
         DispatchQueue.main.async {
-            withAnimation(.easeInOut(duration: AmidaViewModel.drawDuration)) {
+            withAnimation(.linear(duration: AmidaViewModel.drawDuration)) {
                 viewModel.drawProgress = 1
             }
         }
@@ -89,10 +94,13 @@ struct AmidaView: View {
             Spacer()
             Button(
                 action: {
-                    // 編集を開くときはスタート前の状態に戻す（項目変更で経路が無効になるため）
                     if !isEditing {
+                        // 編集を開くときはスタート前の状態に戻す（項目変更で経路が無効になるため）
                         viewModel.clearTrace()
                         hasStarted = false
+                    } else {
+                        // 設定を閉じるとき：レビュー依頼（優先）または広告を表示
+                        AdManager.shared.notifySettingsClosed()
                     }
                     isEditing.toggle()
                 },
@@ -138,17 +146,15 @@ struct AmidaView: View {
                     )
                     .transition(.opacity)
                 } else {
-                    // あみだくじ本体は描いたまま、中央をすりガラスで覆って中身をぼかす。
-                    // 下のあみだがうっすら透けて「隠れた中身がある」ことを上品に伝える。
+                    // 縦線の上端・下端（株）だけをちら見せし、中央は不透明カバーで隠す。
                     LadderView(
                         laneCount: viewModel.laneCount,
                         rungs: viewModel.rungs,
                         tracedPaths: [:],
                         progress: 0,
                         color: { Self.color(for: $0) },
-                        lineColor: BrandTheme.mint.opacity(0.30)
+                        stubOnly: true
                     )
-                    .padding(.vertical, 26)
                     hiddenCover
                 }
             }
@@ -158,34 +164,32 @@ struct AmidaView: View {
         }
     }
 
-    /// スタート前に中央のあみだくじを覆うすりガラス。
-    /// 下のあみだくじがうっすら透けて「隠れた中身がある」ことを上品に伝える。
+    /// スタート前に中央のあみだくじを覆う不透明カバー。
+    /// 中身は透けず、中央の鍵アイコンで「隠れている」ことを示す。
     private var hiddenCover: some View {
         let shape = RoundedRectangle(cornerRadius: 20, style: .continuous)
-        return shape
-            .fill(.ultraThinMaterial)
-            // ガラスをやや薄くして下のあみだくじの模様を透けさせる（答えは読めない程度に）
-            .opacity(0.9)
-            .overlay(
-                // 細い縁でカードの存在を締める
-                shape.stroke(Color.white.opacity(0.6), lineWidth: 1)
-            )
-            .overlay(
-                // 中央の鍵アイコン（すりガラス上の白い円チップに乗せる）
-                Image(systemName: "lock.fill")
-                    .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(BrandTheme.mint)
-                    .frame(width: 56, height: 56)
-                    .background(
-                        Circle()
-                            .fill(.regularMaterial)
-                            .overlay(Circle().stroke(Color.white.opacity(0.7), lineWidth: 1))
-                            .shadow(color: Color.black.opacity(0.08), radius: 6, y: 2)
-                    )
-            )
-            .shadow(color: Color.black.opacity(0.06), radius: 12, y: 4)
-            // 上下の株（縦線の見えている区間）を残すため内側に余白を取る
-            .padding(.vertical, 26)
+        // 透過なしのベタ塗り（ごく薄いグレー地の不透明カバー。色味は控えめに）
+        let fill = Color.black.opacity(0.04)
+        return ZStack {
+            shape.fill(Color.white)
+            shape.fill(fill)
+            shape.stroke(Color.black.opacity(0.08), lineWidth: 1)
+
+            // 中央の鍵アイコン
+            Image(systemName: "lock.fill")
+                .font(.system(size: 22, weight: .semibold))
+                .foregroundColor(BrandTheme.mint.opacity(0.55))
+                .frame(width: 56, height: 56)
+                .background(
+                    Circle()
+                        .fill(Color.white)
+                        .overlay(Circle().stroke(Color.black.opacity(0.08), lineWidth: 1))
+                        .shadow(color: Color.black.opacity(0.08), radius: 6, y: 2)
+                )
+        }
+        .shadow(color: Color.black.opacity(0.06), radius: 12, y: 4)
+        // 上下の株（縦線の見えている区間）を残すため内側に余白を取る
+        .padding(.vertical, 26)
     }
 
     /// 上段/下段のラベル行。上段はタップ可能なボタンにする。
@@ -193,27 +197,21 @@ struct AmidaView: View {
         HStack(spacing: 0) {
             ForEach(0..<viewModel.laneCount, id: \.self) { i in
                 let label = i < labels.count ? labels[i] : ""
-                // ハイライト色：上段は自レーンの色、下段は「そこに到達した経路の開始レーン」の色。
+                // 色：上段は常に自レーンの色。下段は「そこに到達した経路の開始レーン」の色。
                 let highlightColor: Color? = isTop
-                    ? (viewModel.tracedPaths[i] != nil ? Self.color(for: i) : nil)
+                    ? Self.color(for: i)
                     : startLaneColorReaching(resultLane: i)
-                Group {
-                    if isTop {
-                        Button(action: { startTrace { viewModel.trace(from: i) } }) {
-                            laneChip(label, highlightColor: highlightColor)
-                        }
-                        .disabled(viewModel.isTracing)
-                    } else {
-                        laneChip(label, highlightColor: highlightColor)
-                    }
-                }
-                .frame(maxWidth: .infinity)
+                laneChip(label, highlightColor: highlightColor)
+                    .frame(maxWidth: .infinity)
             }
         }
     }
 
     /// 下段 resultLane に到達している経路があれば、その開始レーンの色を返す。
+    /// ただし線がゴールまで引き終わる（アニメーション完了）までは色をつけない。
     private func startLaneColorReaching(resultLane: Int) -> Color? {
+        // 描画アニメーション中は結果を伏せる
+        guard !viewModel.isTracing, viewModel.drawProgress >= 1 else { return nil }
         for (startLane, path) in viewModel.tracedPaths where path.last == resultLane {
             return Self.color(for: startLane)
         }
@@ -268,24 +266,6 @@ struct AmidaView: View {
                     .background(Capsule().fill(canTraceAll ? BrandTheme.mint : BrandTheme.mint.opacity(0.4)))
             }
             .disabled(!canTraceAll || viewModel.isTracing)
-
-            // 経路のクリア。スタート前の状態に戻す。
-            Button(action: {
-                viewModel.clearTrace()
-                withAnimation(.easeInOut(duration: 0.2)) { hasStarted = false }
-            }) {
-                Image(systemName: "arrow.counterclockwise")
-                    .font(.system(size: 22, weight: .semibold))
-                    .foregroundColor(BrandTheme.mint)
-                    .frame(width: 56, height: 56)
-                    .background(
-                        Circle()
-                            .fill(Color.white)
-                            .shadow(color: Color.black.opacity(0.08), radius: 8, y: 2)
-                            .overlay(Circle().stroke(BrandTheme.mint.opacity(0.4), lineWidth: 1))
-                    )
-            }
-            .disabled(viewModel.tracedPaths.isEmpty || viewModel.isTracing)
         }
     }
 
@@ -343,6 +323,22 @@ struct AmidaView: View {
                     }
                 }
                 .frame(maxHeight: 260)
+            }
+
+            Divider().overlay(Color.black.opacity(0.08))
+
+            // 複雑さ（横棒の量）の選択
+            VStack(alignment: .leading, spacing: 8) {
+                Text(LocalizedStringKey("AmidaComplexity"))
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(BrandTheme.textPrimary.opacity(0.5))
+
+                Picker("Complexity", selection: $viewModel.complexity) {
+                    ForEach(AmidaComplexity.allCases) { c in
+                        Text(LocalizedStringKey(c.titleKey)).tag(c)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
             }
         }
         .padding(20)

@@ -38,3 +38,7 @@
 "AmidaClear" = "清除";
 "AmidaAll" = "全部";
 "AmidaTapStart" = "按開始";
+"AmidaComplexity" = "複雜度";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";

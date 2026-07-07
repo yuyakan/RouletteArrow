@@ -38,3 +38,7 @@
 "AmidaClear" = "清除";
 "AmidaAll" = "全部";
 "AmidaTapStart" = "点击开始";
+"AmidaComplexity" = "复杂度";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";

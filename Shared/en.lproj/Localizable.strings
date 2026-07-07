@@ -38,3 +38,7 @@
 "AmidaClear" = "Clear";
 "AmidaAll" = "All";
 "AmidaTapStart" = "Tap Start";
+"AmidaComplexity" = "Complexity";
+"AmidaComplexityEasy" = "★";
+"AmidaComplexityNormal" = "★★";
+"AmidaComplexityHard" = "★★★";

@@ -8,9 +8,36 @@
 
 import Foundation
 
+/// あみだくじの複雑さ（横棒の量）。段数で表現する。
+enum AmidaComplexity: Int, CaseIterable, Identifiable {
+    case easy    // かんたん
+    case normal  // ふつう
+    case hard    // ふくざつ
+
+    var id: Int { rawValue }
+
+    var titleKey: String {
+        switch self {
+        case .easy:   return "AmidaComplexityEasy"
+        case .normal: return "AmidaComplexityNormal"
+        case .hard:   return "AmidaComplexityHard"
+        }
+    }
+
+    /// この複雑さでの横棒の段数。多いほど入り組む。
+    var rowCount: Int {
+        switch self {
+        case .easy:   return 5
+        case .normal: return 9
+        case .hard:   return 15
+        }
+    }
+}
+
 class AmidaViewModel: ObservableObject {
     private static let participantsKey = "amida_participants"
     private static let resultsKey = "amida_results"
+    private static let complexityKey = "amida_complexity"
 
     /// 縦線の本数（＝参加者数＝結果数）の範囲
     static let laneRange = 2...8
@@ -36,8 +63,16 @@ class AmidaViewModel: ObservableObject {
     /// アニメーション中フラグ（描画中は操作を抑制する）
     @Published var isTracing: Bool = false
 
-    /// 横棒を並べる段数。多いほど入り組んだあみだくじになる。
-    static let rowCount = 8
+    /// あみだくじの複雑さ。変更時は永続化し、横棒を引き直す。
+    @Published var complexity: AmidaComplexity {
+        didSet {
+            UserDefaults.standard.set(complexity.rawValue, forKey: Self.complexityKey)
+            regenerate()
+        }
+    }
+
+    /// 横棒を並べる段数（複雑さに応じて変わる）。
+    var rowCount: Int { complexity.rowCount }
 
     init() {
         let savedParticipants = UserDefaults.standard.stringArray(forKey: Self.participantsKey)
@@ -50,6 +85,9 @@ class AmidaViewModel: ObservableObject {
             self.participants = ["A", "B", "C"]
             self.results = ["🎁", "❌", "❌"]
         }
+        // 保存済みの複雑さを復元（未設定は ふつう）
+        let savedComplexity = UserDefaults.standard.object(forKey: Self.complexityKey) as? Int
+        self.complexity = savedComplexity.flatMap(AmidaComplexity.init) ?? .normal
         regenerate()
     }
 
@@ -92,26 +130,31 @@ class AmidaViewModel: ObservableObject {
             rungs = []
             return
         }
+        // gap i は lane i と lane i+1 を繋ぐ横棒の位置（0..<lanes-1）。
+        let gaps = Array(0..<(lanes - 1))
+        // 1本あたりの横棒を置く確率。左詰めの偏りをなくすため、
+        // 各行で gap の順序をシャッフルしてから隣接衝突を避けて置く。
+        let placeProbability = 0.5
+
         var newRungs: [[Int]] = []
-        for _ in 0..<Self.rowCount {
-            var rowRungs: [Int] = []
-            var lane = 0
-            // lane を左から見て、確率で横棒を置く。置いたら次の lane を1つ飛ばして交差を防ぐ。
-            while lane < lanes - 1 {
-                if Bool.random() {
-                    rowRungs.append(lane)
-                    lane += 2
-                } else {
-                    lane += 1
+        for _ in 0..<rowCount {
+            var used = Array(repeating: false, count: lanes - 1)
+            // gap をランダム順に見て、両隣が未使用なら確率で横棒を置く（左右どちらにも偏らない）
+            for gap in gaps.shuffled() {
+                let leftBusy = gap > 0 && used[gap - 1]
+                let rightBusy = gap < lanes - 2 && used[gap + 1]
+                if !leftBusy && !rightBusy && Double.random(in: 0..<1) < placeProbability {
+                    used[gap] = true
                 }
             }
+            let rowRungs = gaps.filter { used[$0] }
             newRungs.append(rowRungs)
         }
         rungs = newRungs
     }
 
     /// 線を引くアニメーションの秒数。
-    static let drawDuration: Double = 0.9
+    static let drawDuration: Double = 6.0
 
     /// 経路表示をクリアする。
     func clearTrace() {

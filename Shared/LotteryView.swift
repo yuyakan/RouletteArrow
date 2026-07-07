@@ -55,8 +55,12 @@ struct LotteryView: View {
             Spacer()
             Button(
                 action: {
-                    // 閉じるときは入力途中の下書きを破棄してモデル値に揃える
-                    if isEditingItems { weightDrafts = [:] }
+                    if isEditingItems {
+                        // 閉じるときは入力途中の下書きを破棄してモデル値に揃える
+                        weightDrafts = [:]
+                        // 設定を閉じるとき：レビュー依頼（優先）または広告を表示
+                        AdManager.shared.notifySettingsClosed()
+                    }
                     isEditingItems.toggle()
                 },
                 label: {
