@@ -6,38 +6,27 @@
 //
 
 import SwiftUI
-import AppTrackingTransparency
 import UIKit
-import GoogleMobileAds
 
 // AppDelegateクラスを定義する
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        // Mobile Ads SDKを初期化する
-        MobileAds.shared.start(completionHandler: nil)
+        // Mobile Ads SDK の初期化は同意フロー(UMP → ATT)の完了後に
+        // ConsentManager で行うため、ここでは初期化しない。
         return true
     }
 }
 
 @main
 struct RouletteArrowApp: App {
-    init() {
-            if ATTrackingManager.trackingAuthorizationStatus == .notDetermined {
-                //User has not indicated their choice for app tracking
-                //You may want to show a pop-up explaining why you are collecting their data
-                //Toggle any variables to do this here
-            } else {
-                ATTrackingManager.requestTrackingAuthorization { status in
-                    //Whether or not user has opted in initialize GADMobileAds here it will handle the rest
-                                                                
-                    MobileAds.shared.start(completionHandler: nil)
-                }
-            }
-        }
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
             RootTabView()
+                .onAppear {
+                    // UMP 同意 → ATT 許諾 → Mobile Ads SDK 初期化 の順に実行する。
+                    ConsentManager.shared.gatherConsentAndStart()
+                }
         }
     }
 }
