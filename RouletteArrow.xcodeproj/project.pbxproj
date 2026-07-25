@@ -15,17 +15,15 @@
 		4B8DF0482AF8A19B00BFF8AB /* Roulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */; };
 		4B8DF04D2AF8BA9500BFF8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */; };
 		4B8DF04E2AF8BA9500BFF8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B8DF0502AF8BA9500BFF8AB /* Localizable.strings */; };
-		4BIPLGRP010000000000000001 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BIPLGRP010000000000000000 /* InfoPlist.strings */; };
-		4BIPLGRP010000000000000002 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BIPLGRP010000000000000000 /* InfoPlist.strings */; };
 		4BADMGR010000000000000001 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BADMGR010000000000000000 /* AdManager.swift */; };
 		4BADMGR010000000000000002 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BADMGR010000000000000000 /* AdManager.swift */; };
-		4BCNSNT010000000000000001 /* ConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCNSNT010000000000000000 /* ConsentManager.swift */; };
 		4BAMDVM010000000000000001 /* AmidaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVM010000000000000000 /* AmidaViewModel.swift */; };
 		4BAMDVM010000000000000002 /* AmidaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVM010000000000000000 /* AmidaViewModel.swift */; };
 		4BAMDVW010000000000000001 /* AmidaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVW010000000000000000 /* AmidaView.swift */; };
 		4BAMDVW010000000000000002 /* AmidaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BAMDVW010000000000000000 /* AmidaView.swift */; };
 		4BBRAND010000000000000001 /* BrandTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBRAND010000000000000000 /* BrandTheme.swift */; };
 		4BBRAND010000000000000002 /* BrandTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BBRAND010000000000000000 /* BrandTheme.swift */; };
+		4BCNSNT010000000000000001 /* ConsentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BCNSNT010000000000000000 /* ConsentManager.swift */; };
 		4BD50E2A27CFAB81000A5A4F /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2927CFAB81000A5A4F /* Tests_iOS.swift */; };
 		4BD50E2C27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E2B27CFAB81000A5A4F /* Tests_iOSLaunchTests.swift */; };
 		4BD50E3627CFAB81000A5A4F /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E3527CFAB81000A5A4F /* Tests_macOS.swift */; };
@@ -36,6 +34,8 @@
 		4BD50E3C27CFAB81000A5A4F /* RouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD50E1227CFAB80000A5A4F /* RouletteView.swift */; };
 		4BD50E3D27CFAB81000A5A4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD50E1327CFAB81000A5A4F /* Assets.xcassets */; };
 		4BD50E3E27CFAB81000A5A4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD50E1327CFAB81000A5A4F /* Assets.xcassets */; };
+		4BIPLGRP010000000000000001 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BIPLGRP010000000000000000 /* InfoPlist.strings */; };
+		4BIPLGRP010000000000000002 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BIPLGRP010000000000000000 /* InfoPlist.strings */; };
 		4BLOTVM010000000000000001 /* LotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BLOTVM010000000000000000 /* LotteryViewModel.swift */; };
 		4BLOTVM010000000000000002 /* LotteryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BLOTVM010000000000000000 /* LotteryViewModel.swift */; };
 		4BLOTVW010000000000000001 /* LotteryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BLOTVW010000000000000000 /* LotteryView.swift */; };
@@ -74,26 +74,13 @@
 		4B8DF0462AF8A19B00BFF8AB /* Roulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roulette.swift; sourceTree = "<group>"; };
 		4B8DF04F2AF8BA9500BFF8AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4B8DF0512AF8BAAC00BFF8AB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4BIPLEN010000000000000000 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLJA010000000000000000 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLZHK01000000000000000 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		4BIPLZHS01000000000000000 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		4BIPLES010000000000000000 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLFR010000000000000000 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLDE010000000000000000 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLPT010000000000000000 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		4BIPLIT010000000000000000 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLKO010000000000000000 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLID010000000000000000 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLVI010000000000000000 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		4BIPLTH010000000000000000 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4BADMGR010000000000000000 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
-		4BCNSNT010000000000000000 /* ConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentManager.swift; sourceTree = "<group>"; };
 		4BAMDVM010000000000000000 /* AmidaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmidaViewModel.swift; sourceTree = "<group>"; };
 		4BAMDVW010000000000000000 /* AmidaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmidaView.swift; sourceTree = "<group>"; };
 		4BBRAND010000000000000000 /* BrandTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrandTheme.swift; sourceTree = "<group>"; };
 		4BC70A952AFBBCBC001F2E31 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4BC70A962AFBC44B001F2E31 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		4BCNSNT010000000000000000 /* ConsentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsentManager.swift; sourceTree = "<group>"; };
 		4BD50E1127CFAB80000A5A4F /* RouletteArrowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteArrowApp.swift; sourceTree = "<group>"; };
 		4BD50E1227CFAB80000A5A4F /* RouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteView.swift; sourceTree = "<group>"; };
 		4BD50E1327CFAB81000A5A4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -107,6 +94,19 @@
 		4BD50E3527CFAB81000A5A4F /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		4BD50E3727CFAB81000A5A4F /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		4BD50E4D27D1C336000A5A4F /* RouletteArrow--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RouletteArrow--iOS--Info.plist"; sourceTree = "<group>"; };
+		4BIPLDE010000000000000000 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLEN010000000000000000 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLES010000000000000000 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLFR010000000000000000 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLID010000000000000000 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLIT010000000000000000 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLJA010000000000000000 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLKO010000000000000000 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLPT010000000000000000 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		4BIPLTH010000000000000000 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLVI010000000000000000 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4BIPLZHK01000000000000000 /* zh-HK */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-HK"; path = "zh-HK.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		4BIPLZHS01000000000000000 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		4BLOCDE010000000000000000 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BLOCES010000000000000000 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4BLOCFR010000000000000000 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -666,7 +666,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kanbe1365.RouletteArrow;
 				PRODUCT_NAME = RouletteArrow;
 				SDKROOT = iphoneos;
@@ -697,7 +697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = kanbe1365.RouletteArrow;
 				PRODUCT_NAME = RouletteArrow;
 				SDKROOT = iphoneos;
