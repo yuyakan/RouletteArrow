@@ -24,6 +24,7 @@ final class AdManager {
     private var skipNextCount = false
 
     private init() {
+        log("initialized")
         interstitial.loadInterstitial()
     }
 
@@ -35,17 +36,20 @@ final class AdManager {
         // 広告表示直後の次の1回はカウントせず、そのまま実行させる
         if skipNextCount {
             skipNextCount = false
+            log("notifySpin -> allow (skipNextCount consumed) spinCount=\(spinCount)")
             return true
         }
 
         spinCount += 1
         if spinCount >= frequency {
             // frequency 回目：スタート処理は行わず広告を表示し、カウントをリセット
+            log("notifySpin -> show ad spinCount=\(spinCount) frequency=\(frequency)")
             spinCount = 0
             skipNextCount = true
             interstitial.presentInterstitial()
             return false
         }
+        log("notifySpin -> allow spinCount=\(spinCount) frequency=\(frequency)")
         return true
     }
 
@@ -55,11 +59,20 @@ final class AdManager {
     func notifySettingsClosed() {
         // レビュー依頼を優先（同じタイミングなら広告は出さない）
         if ReviewManager.shared.requestReviewIfNeededOnSettingsClosed() {
+            log("notifySettingsClosed -> review requested, reset spinCount")
             spinCount = 0
             return
         }
-        guard spinCount >= minSpinsForAd else { return }
+        guard spinCount >= minSpinsForAd else {
+            log("notifySettingsClosed -> no ad spinCount=\(spinCount) minSpinsForAd=\(minSpinsForAd)")
+            return
+        }
+        log("notifySettingsClosed -> show ad spinCount=\(spinCount) minSpinsForAd=\(minSpinsForAd)")
         spinCount = 0
         interstitial.presentInterstitial()
+    }
+
+    private func log(_ message: String) {
+        print("[AdMob][AdManager] \(message)")
     }
 }
